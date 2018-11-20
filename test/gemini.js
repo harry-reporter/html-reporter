@@ -43,7 +43,7 @@ describe('lib/gemini', () => {
         return gemini.emitAndWait(gemini.events.INIT);
     }
 
-    function mkStubResult_(options) {
+    const mkStubResult_ = (options) => {
         return _.defaultsDeep(options, {
             state: {name: 'name-default'},
             browserId: 'browserId-default',
@@ -51,12 +51,21 @@ describe('lib/gemini', () => {
                 path: ['suite/path-default'],
                 metaInfo: {sessionId: 'sessionId-default'}
             },
-            saveDiffTo: sandbox.stub(),
-            currentPath: 'current/path-default',
-            referencePath: 'reference/path-default',
-            equal: false
+            refImg: {path: 'reference/path-default', size: {width: 100500, height: 500100}}
         });
-    }
+    };
+
+    const mkStubTestResult_ = (options) => {
+        return mkStubResult_(_.defaultsDeep(options, {
+            saveDiffTo: sandbox.stub(),
+            currImg: {path: 'current/path-default', size: {width: 100500, height: 500100}},
+            equal: false
+        }));
+    };
+
+    const mkStubUpdateResult_ = (options) => {
+        return mkStubResult_(_.defaults(options, {updated: true}));
+    };
 
     beforeEach(() => {
         gemini = mkGemini_();
@@ -108,8 +117,8 @@ describe('lib/gemini', () => {
 
         return initReporter_()
             .then(() => {
-                gemini.emit(gemini.events.TEST_RESULT, mkStubResult_({
-                    referencePath: 'reference/path',
+                gemini.emit(gemini.events.TEST_RESULT, mkStubTestResult_({
+                    refImg: {path: 'reference/path'},
                     equal: true
                 }));
                 gemini.emit(gemini.events.END);
@@ -123,7 +132,7 @@ describe('lib/gemini', () => {
     it('should handle updated references as success result', () => {
         return initReporter_()
             .then(() => {
-                gemini.emit(gemini.events.UPDATE_RESULT, mkStubResult_({updated: true}));
+                gemini.emit(gemini.events.UPDATE_RESULT, mkStubUpdateResult_({updated: true}));
 
                 assert.calledOnceWith(ReportBuilder.prototype.addSuccess, sinon.match({updated: true}));
             });
@@ -134,8 +143,8 @@ describe('lib/gemini', () => {
             .then(() => {
                 sandbox.stub(utils, 'getReferenceAbsolutePath').returns('absolute/reference/path');
 
-                gemini.emit(gemini.events.UPDATE_RESULT, mkStubResult_({
-                    imagePath: 'updated/image/path'
+                gemini.emit(gemini.events.UPDATE_RESULT, mkStubUpdateResult_({
+                    refImg: {path: 'updated/image/path'}
                 }));
                 gemini.emit(gemini.events.END);
 
@@ -147,7 +156,7 @@ describe('lib/gemini', () => {
 
     describe('when screenshots are not equal', () => {
         function emitResult_(options) {
-            gemini.emit(gemini.events.TEST_RESULT, mkStubResult_(options));
+            gemini.emit(gemini.events.TEST_RESULT, mkStubTestResult_(options));
             gemini.emit(gemini.events.END);
             return gemini.emitAndWait(gemini.events.END_RUNNER);
         }
@@ -157,7 +166,7 @@ describe('lib/gemini', () => {
                 .then(() => {
                     sandbox.stub(utils, 'getCurrentAbsolutePath').returns('/absolute/report/current/path');
 
-                    return emitResult_({currentPath: 'current/path'})
+                    return emitResult_({currImg: {path: 'current/path'}})
                         .then(() => {
                             assert.calledWith(utils.copyImageAsync, 'current/path', '/absolute/report/current/path');
                         });
@@ -169,7 +178,7 @@ describe('lib/gemini', () => {
                 .then(() => {
                     sandbox.stub(utils, 'getReferenceAbsolutePath').returns('/absolute/report/reference/path');
 
-                    return emitResult_({referencePath: 'reference/path'})
+                    return emitResult_({refImg: {path: 'reference/path'}})
                         .then(() => {
                             assert.calledWith(utils.copyImageAsync, 'reference/path', '/absolute/report/reference/path');
                         });
