@@ -58,6 +58,7 @@ describe('lib/hermione', () => {
     beforeEach(() => {
         hermione = mkHermione_();
 
+        sandbox.spy(PluginAdapter.prototype, 'addApi');
         sandbox.spy(PluginAdapter.prototype, 'addCliCommands');
         sandbox.spy(PluginAdapter.prototype, 'init');
 
@@ -80,6 +81,7 @@ describe('lib/hermione', () => {
         sandbox.stub(ReportBuilder.prototype, 'addError');
         sandbox.stub(ReportBuilder.prototype, 'addFail');
         sandbox.stub(ReportBuilder.prototype, 'addRetry');
+        sandbox.stub(ReportBuilder.prototype, 'setSidebarItems');
         sandbox.stub(ReportBuilder.prototype, 'save');
     });
 
@@ -89,6 +91,11 @@ describe('lib/hermione', () => {
         return initReporter_({enabled: false}).then(() => {
             assert.notCalled(PluginAdapter.prototype.addCliCommands);
         });
+    });
+
+    it('should add api', () => {
+        return initReporter_()
+            .then(() => assert.calledOnce(PluginAdapter.prototype.addCliCommands));
     });
 
     it('should add cli commands', () => {
@@ -183,6 +190,16 @@ describe('lib/hermione', () => {
                     });
             });
         });
+    });
+
+    it('should set sidebar items', () => {
+        return initReporter_()
+            .then(() => {
+                hermione.htmlReporter.addSidebarItem('some', 'item');
+
+                return hermione.emitAndWait(hermione.events.RUNNER_END);
+            })
+            .then(() => assert.calledOnceWith(ReportBuilder.prototype.setSidebarItems, {some: 'item'}));
     });
 
     it('should save statistic', () => {

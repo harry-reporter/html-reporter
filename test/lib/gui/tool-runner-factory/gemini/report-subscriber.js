@@ -23,6 +23,7 @@ describe('lib/gui/tool-runner-factory/gemini/report-subscriber', () => {
         reportBuilder = sinon.createStubInstance(ReportBuilder);
         sandbox.stub(ReportBuilder, 'create').returns(reportBuilder);
         reportBuilder.save.resolves();
+        reportBuilder.setSidebarItems.returns(reportBuilder);
 
         client = new EventEmitter();
         sandbox.spy(client, 'emit');
@@ -31,6 +32,16 @@ describe('lib/gui/tool-runner-factory/gemini/report-subscriber', () => {
     afterEach(() => sandbox.restore());
 
     describe('END_RUNNER', () => {
+        it('should set sidebar items', () => {
+            const gemini = mkGemini_();
+
+            reportSubscriber(gemini, reportBuilder, client);
+            gemini.htmlReporter.sidebarItems = {some: 'item'};
+
+            return gemini.emitAndWait(gemini.events.END_RUNNER)
+                .then(() => assert.calledOnceWith(reportBuilder.setSidebarItems, {some: 'item'}));
+        });
+
         it('should save report', () => {
             const gemini = mkGemini_();
 

@@ -463,6 +463,14 @@ a:active {
             animation: scale 0.75s 0s infinite cubic-bezier(0.2, 0.68, 0.18, 1.08);
 }
 
+.sidebar-container {
+    display: inline-block;
+    position: fixed;
+    font-size: 1.2em;
+    vertical-align: middle;
+    margin-left: 5px;
+}
+
 @-webkit-keyframes scale {
     0% {
         -webkit-transform: scale(1);

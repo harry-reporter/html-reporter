@@ -111,3 +111,15 @@ Run [eslint](http://eslint.org) codestyle verification
 ```bash
 npm run lint
 ```
+
+## Api
+
+Html-reporter adds to your tool object with api:
+
+### addSidebarItem
+
+Adds item to sidebar of html-report as link:
+
+```
+tool.htmlReporter.addSidebarItem('html-reporter', 'https://github.com/gemini-testing/html-reporter')
+```

@@ -23,6 +23,7 @@ describe('lib/gui/tool-runner-factory/hermione/report-subscriber', () => {
         reportBuilder = sinon.createStubInstance(ReportBuilder);
         sandbox.stub(ReportBuilder, 'create').returns(reportBuilder);
         reportBuilder.save.resolves();
+        reportBuilder.setSidebarItems.returns(reportBuilder);
 
         client = new EventEmitter();
         sandbox.spy(client, 'emit');
@@ -31,6 +32,16 @@ describe('lib/gui/tool-runner-factory/hermione/report-subscriber', () => {
     afterEach(() => sandbox.restore());
 
     describe('RUNNER_END', () => {
+        it('should set sidebar items', () => {
+            const hermione = mkHermione_();
+
+            reportSubscriber(hermione, reportBuilder, client);
+            hermione.htmlReporter.sidebarItems = {some: 'item'};
+
+            return hermione.emitAndWait(hermione.events.RUNNER_END)
+                .then(() => assert.calledOnceWith(reportBuilder.setSidebarItems, {some: 'item'}));
+        });
+
         it('should save report', () => {
             const hermione = mkHermione_();
 
