@@ -8,16 +8,14 @@ const HtmlWebpackIncludeAssetsPlugin = require('html-webpack-include-assets-plug
 const staticPath = path.resolve(__dirname, 'lib', 'static');
 
 module.exports = {
-    entry: {
-        report: ['./index.js', './styles.css'],
-        gui: ['./gui.js', './styles.css', './gui.css']
-    },
+    entry: './index.tsx',
     context: staticPath,
     output: {
-        path: staticPath,
-        filename: '[name].min.js',
-        hotUpdateChunkFilename: '../../hot/hot-update.js',
-        hotUpdateMainFilename: '../../hot/hot-update.json'
+        filename: 'bundle.js',
+        path: staticPath
+    },
+    resolve: {
+        extensions: ['.tsx', '.ts', '.js']
     },
     module: {
         rules: [
@@ -32,8 +30,8 @@ module.exports = {
                 })
             },
             {
-                test: /\.js$/,
-                use: 'babel-loader',
+                test: /\.tsx?$/,
+                use: 'ts-loader',
                 exclude: /node_modules/
             }
         ]
@@ -41,16 +39,7 @@ module.exports = {
     plugins: [
         new ExtractTextPlugin('[name].min.css'),
         new HtmlWebpackPlugin({
-            title: 'HTML report',
-            filename: 'index.html',
-            template: 'template.html',
-            chunks: ['report']
-        }),
-        new HtmlWebpackPlugin({
-            title: 'Gui report',
-            filename: 'gui.html',
-            template: 'template.html',
-            chunks: ['gui']
+            template: 'index.html'
         }),
         new HtmlWebpackIncludeAssetsPlugin({
             files: ['index.html'],
