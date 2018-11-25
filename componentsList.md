@@ -11,7 +11,7 @@
 - imageView ( режим отображения для сравнения: 2-up, Diff, Swipe, Onion Skin)
 - labels (https://styleguide.github.com/primer/components/labels/)
 - alerts (https://styleguide.github.com/primer/components/alerts/)
-- icon
+- icon (https://primer.style/components/docs/StyledOcticon)
 
 # Список фич
 
