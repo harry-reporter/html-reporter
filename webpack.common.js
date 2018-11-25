@@ -4,6 +4,7 @@ const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackIncludeAssetsPlugin = require('html-webpack-include-assets-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const staticPath = path.resolve(__dirname, 'lib', 'static');
 
@@ -45,6 +46,10 @@ module.exports = {
             files: ['index.html'],
             assets: ['data.js'],
             append: false
+        }),
+        new BundleAnalyzerPlugin({
+            openAnalyzer: false,
+            analyzerPort: 8888
         })
     ]
 };
