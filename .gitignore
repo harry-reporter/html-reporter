@@ -5,6 +5,8 @@ hot
 /lib/static/data.js
 /lib/static/gui.html
 /lib/static/index.html
+/lib/static/bundle.js
+/lib/static/styles.css
 
 .idea
 .vscode
