@@ -2,19 +2,23 @@
   "compilerOptions": {
     "outDir": "./dist/",
     "sourceMap": true,
-    "strict": true,
+    "strict": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "module": "commonjs",
     "target": "es5",
     "jsx": "react",
-    "lib": ["es5", "es6", "dom"],
-    "baseUrl": "./",
-    "allowJs": true,
-    "paths": {
-      "*": ["./typings/*"]
-    }
+    "lib": [
+      "es5",
+      "es6",
+      "dom"
+    ],
+    "baseUrl": "./"
   },
-  "include": ["./lib/static/**/*"],
-  "exclude": ["./lib/static/backup/**/*"]
+  "include": [
+    "./lib/static/**/*"
+  ],
+  "exclude": [
+    "./lib/static/backup/**/*"
+  ]
 }
