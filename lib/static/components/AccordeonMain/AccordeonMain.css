@@ -1,0 +1,14 @@
+.Box-detail {
+  display: block;
+}
+
+.Box-detail_isHidden {
+  display: none;
+}
+
+.Box-header--white {
+  background-color: #ffffff;
+}
+.Accordeon-Controls {
+  min-width: 14.4rem;
+}
