@@ -12,17 +12,15 @@ class ButtonCopy extends React.Component<IButtonCopy> {
 
   public getText = () => {
     return this.props.textToCopy;
-  };
+  }
 
   public render() {
     return (
-      <React.Fragment>
-        <div className='text-gray' aria-label='Copy' data-copied-hint='Copied!'>
-          <Clipboard component='div' option-text={this.getText}>
-            <Octicon icon={Clippy} />
-          </Clipboard>
-        </div>
-      </React.Fragment>
+      <div className='text-gray' aria-label='Copy' data-copied-hint='Copied!'>
+        <Clipboard component='div' option-text={this.getText}>
+          <Octicon icon={Clippy} />
+        </Clipboard>
+      </div>
     );
   }
 }

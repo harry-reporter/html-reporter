@@ -35,17 +35,17 @@ class AccordeonSubBox extends React.Component<IAccordeonProps, IAccordeonState> 
     }
   }
 
+  public getTextColor() {
+    return this.props.status === 'success' ? 'green' : this.props.status === 'fail' ? 'red' : 'gray';
+  }
+
   public render() {
     return (
       <React.Fragment>
         <div className='AccordeonSubBox Box-header d-flex flex-justify-between'>
-          <div
-            className={`header d-flex flex-items-center text-${
-              this.props.status === 'success' ? 'green' : this.props.status === 'fail' ? 'red' : 'gray'
-            } pl-1`}
-          >
+          <div className={`header d-flex flex-items-center text-${this.getTextColor()} pl-1`}>
             <div className='Box-btn-octicon'>
-              <Octicon icon={this.props.status == 'success' ? Check : X} />
+              <Octicon icon={this.props.status === 'success' ? Check : X} />
             </div>
             <h4 className='Box-title pl-2 Subhead-heading'>{this.props.title}</h4>
             <Pagination pages={9} />
