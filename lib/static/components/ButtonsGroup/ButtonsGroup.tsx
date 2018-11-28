@@ -1,18 +1,16 @@
 import 'primer-buttons/index.scss';
 import * as React from 'react';
-import Buttons, { IButtonsProps } from '../Buttons/Buttons';
+import Buttons from '../Buttons/Buttons';
 
-interface IButtonsGroupProps {
-  btns: IButtonsProps[];
-}
+import { IButtonsGroupProps } from '../types';
 
 class ButtonsGroup extends React.Component<IButtonsGroupProps> {
   public render() {
     return (
       <React.Fragment>
         <div className='BtnGroup'>
-          {this.props.btns.map((btn) => (
-            <Buttons title={btn.title} icon={btn.icon} onClick={btn.onClick} />
+          {this.props.btns.map((btn, index) => (
+            <Buttons title={btn.title} icon={btn.icon} onClick={btn.onClick} key={index} />
           ))}
         </div>
       </React.Fragment>

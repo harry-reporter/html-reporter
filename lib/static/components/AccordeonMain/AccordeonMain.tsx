@@ -1,18 +1,9 @@
 import Octicon, { ChevronDown, ChevronUp, Clippy } from '@githubprimer/octicons-react';
 
-import 'primer-box/index.scss';
 import * as React from 'react';
-import './AccordeonMain.css';
+import './AccordeonMain.scss';
 import ButtonCopy from '../ButtonCopy/ButtonCopy';
-
-interface IAccordeonProps {
-  title: string;
-  type?: 'success' | 'failed';
-}
-
-interface IAccordeonState {
-  isOpen: boolean;
-}
+import { IAccordeonProps, IAccordeonState } from '../types';
 
 class AccordeonMain extends React.Component<IAccordeonProps, IAccordeonState> {
   constructor(props: IAccordeonProps) {
@@ -39,7 +30,7 @@ class AccordeonMain extends React.Component<IAccordeonProps, IAccordeonState> {
         <div className='Accorderon m-3 mt-4'>
           <div className='Accorderon-Box Box Box--condensed'>
             <div className='Accorderon-Header Box-row d-flex flex-items-center flex-justify-between m-1'>
-              <h3 className={`Accorderon-Title Box-title text-${this.props.type == 'success' ? 'green' : 'red'}`}>
+              <h3 className={`Accorderon-Title Box-title text-${this.props.status === 'success' ? 'green' : 'red'}`}>
                 {this.props.title}
               </h3>
 

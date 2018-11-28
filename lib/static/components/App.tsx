@@ -7,10 +7,44 @@ import GlobalStyle from './GlobalStyle';
 import Header from './Header/Header';
 import AccordeonMain from './AccordeonMain/AccordeonMain';
 import AccordeonSubBox from './AccordeonSubBox/AccordeonSubBox';
+import 'primer/build/build.css';
 
-import data from './dataNew.js';
+import { data } from './data.js';
 
 interface AppProps {}
+
+const newListTest = [];
+
+function findChildren(object) {
+  let obj;
+  if (object.children) {
+    object.children.map((elem) => {
+      obj = findChildren(elem);
+      newListTest.push(obj);
+    });
+  } else return object;
+  return obj;
+}
+
+function getNewListTest() {
+  data.suites.map((elem) => {
+    findChildren(elem);
+  });
+}
+
+function renderAccorderon() {
+  getNewListTest();
+  console.log(newListTest);
+  return newListTest.map((describe, index) => {
+    return (
+      <AccordeonMain title={describe.suitePath.join(' / ')} status={describe.status} key={index}>
+        {describe.browsers.map((it, index) => {
+          return <AccordeonSubBox title={it.name} status={it.result.status} key={index} />;
+        })}
+      </AccordeonMain>
+    );
+  });
+}
 
 const App: React.SFC<AppProps> = () => {
   return (
@@ -20,21 +54,12 @@ const App: React.SFC<AppProps> = () => {
           <Header
             total={data.total}
             passed={data.passed}
-            failed={data.failed}
-            skipped={data.skipped}
-            retries={data.retries}
+            failed={data.suites.failed}
+            skipped={data.suites.skipped}
+            retries={data.suites.retries}
           />
           {console.log(data)}
-          {data.tests.map((description, index) => {
-            return (
-              <AccordeonMain title={description.title} key={index}>
-                {description.checks.map((it, index) => {
-                  return <AccordeonSubBox title={it.title} key={index} />;
-                })}
-              </AccordeonMain>
-            );
-          })}
-
+          {renderAccorderon()}
           <button className={'btn'}>что-то</button>
           <GlobalStyle />
         </>

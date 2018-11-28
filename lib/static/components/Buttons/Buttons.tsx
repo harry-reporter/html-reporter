@@ -2,11 +2,7 @@ import 'primer-buttons/index.scss';
 import * as React from 'react';
 import Octicon from '@githubprimer/octicons-react';
 
-export interface IButtonsProps {
-  title: string;
-  icon?: any;
-  onClick?: () => void;
-}
+import { IButtonsProps } from '../types';
 
 class Buttons extends React.Component<IButtonsProps> {
   public render() {

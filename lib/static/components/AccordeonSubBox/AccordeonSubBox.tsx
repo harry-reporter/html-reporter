@@ -15,15 +15,8 @@ import './AccordeonSubBox.css';
 import Pagination from '../Pagination/Pagination';
 import ButtonsGroup from '../ButtonsGroup/ButtonsGroup';
 import Buttons from '../Buttons/Buttons';
-
-interface IAccordeonProps {
-  title: string;
-  status?: 'success' | 'failed';
-}
-
-interface IAccordeonState {
-  isOpen: boolean;
-}
+import BoxViewError from '../BoxViewError/BoxViewError';
+import { IAccordeonProps, IAccordeonState } from '../types';
 
 class AccordeonSubBox extends React.Component<IAccordeonProps, IAccordeonState> {
   constructor(props: IAccordeonProps) {
@@ -48,7 +41,7 @@ class AccordeonSubBox extends React.Component<IAccordeonProps, IAccordeonState> 
         <div className='AccordeonSubBox Box-header d-flex flex-justify-between'>
           <div
             className={`header d-flex flex-items-center text-${
-              this.props.status === 'success' ? 'green' : this.props.status === 'failed' ? 'red' : 'gray'
+              this.props.status === 'success' ? 'green' : this.props.status === 'fail' ? 'red' : 'gray'
             } pl-1`}
           >
             <div className='Box-btn-octicon'>
@@ -78,7 +71,14 @@ class AccordeonSubBox extends React.Component<IAccordeonProps, IAccordeonState> 
             </div>
           </div>
         </div>
-        <div className={`Box-body${this.state.isOpen ? '' : '_isHidden'}`}>{this.props.children}</div>
+        <div className={`Box-body${this.state.isOpen ? '' : '_isHidden'} p-0`}>
+          {this.props.children}
+          <BoxViewError
+            message={'AssertionError: не сработал счетчик'}
+            stack={'at assertCountersd - checkCounter2.js:47:20'}
+            image={'./images/chrome-desktop_current_7.png'}
+          />
+        </div>
       </React.Fragment>
     );
   }
