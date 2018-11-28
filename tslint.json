@@ -17,6 +17,8 @@
     "typedef": false,
     "interface-name": false,
     "ordered-imports": false,
+    "object-literal-key-quotes": false,
+    "object-literal-sort-keys": false,
     "no-unsafe-any": false,
     "no-empty-interface": false,
     "no-implicit-dependencies": false,

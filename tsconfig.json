@@ -9,7 +9,10 @@
         "target": "es5",
         "jsx": "react",
         "lib": ["es5", "es6", "dom"],
-        "baseUrl": "./"
+        "baseUrl": "./",
+        "paths": {
+          "src/*": ["lib/static/*"]
+        }
     },
     "include": [
         "./lib/static/**/*"
