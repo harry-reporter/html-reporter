@@ -36,3 +36,18 @@ export interface IButtonsGroupProps {
 export interface IHeaderProps {
   [key: string]: number;
 }
+
+export interface IViewAssertsProps {
+  stateName: string;
+  refImagePath: string;
+  status: 'success' | 'fail';
+  expectedPath: string;
+}
+
+export interface IBoxViewAssertsProps {
+  imagesInfo: IViewAssertsProps[];
+}
+
+export interface IBoxViewAssertsState {
+  imagesInfo: IViewAssertsProps[];
+}
