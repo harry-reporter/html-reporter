@@ -3,7 +3,7 @@ import * as React from 'react';
 import Buttons, { IButtonsProps } from '../Buttons/Buttons';
 
 interface IButtonsGroupProps {
-  btns: [IButtonsProps];
+  btns: IButtonsProps[];
 }
 
 class ButtonsGroup extends React.Component<IButtonsGroupProps> {
@@ -12,7 +12,7 @@ class ButtonsGroup extends React.Component<IButtonsGroupProps> {
       <React.Fragment>
         <div className='BtnGroup'>
           {this.props.btns.map((btn) => (
-            <Buttons title={btn.title} onClick={btn.onClick} />
+            <Buttons title={btn.title} icon={btn.icon} onClick={btn.onClick} />
           ))}
         </div>
       </React.Fragment>

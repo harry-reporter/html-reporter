@@ -2,7 +2,11 @@ import * as React from 'react';
 
 import './Pagination.scss';
 
-class Pagination extends React.Component {
+interface IPaginationProps {
+  pages: number;
+}
+
+class Pagination extends React.Component<IPaginationProps> {
   public render() {
     return (
       <React.Fragment>
@@ -11,30 +15,22 @@ class Pagination extends React.Component {
             <em>Attempts:</em>
           </p>
           <nav className='subnav m-0 pl-2' aria-label='Attempts'>
-            <a href='#url' className='subnav-item py-1 px-2.5'>
-              1
-            </a>
-            <a href='#url' className='subnav-item py-1 px-2.5'>
-              2
-            </a>
-            <a href='#url' className='subnav-item py-1 px-2.5'>
-              3
-            </a>
-            <a href='#url' className='subnav-item py-1 px-2.5'>
-              4
-            </a>
-            <a href='#url' className='subnav-item py-1 px-2.5'>
-              5
-            </a>
-            <a href='#url' className='subnav-item py-1 px-2.5'>
-              6
-            </a>
-            <a href='#url' className='subnav-item py-1 px-2.5'>
-              7
-            </a>
-            <a href='#url' className='subnav-item py-1 px-2.5 selected' aria-current='page'>
-              8
-            </a>
+            {Array.from({ length: this.props.pages })
+              .fill(0)
+              .map((elem, index, arr) => {
+                if (index + 1 === arr.length)
+                  return (
+                    <a href='#url' className='subnav-item py-1 px-2.5 selected' key={index}>
+                      {index + 1}
+                    </a>
+                  );
+                else
+                  return (
+                    <a href='#url' className='subnav-item py-1 px-2.5' key={index}>
+                      {index + 1}
+                    </a>
+                  );
+              })}
           </nav>
         </div>
       </React.Fragment>

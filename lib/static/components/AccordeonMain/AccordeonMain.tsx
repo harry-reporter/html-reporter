@@ -19,7 +19,6 @@ class AccordeonMain extends React.Component<IAccordeonProps, IAccordeonState> {
     super(props);
     this.state = { isOpen: true };
     this.toggle = this.toggle.bind(this);
-    //this.textHeader = React.createRef();
     this.setTextHeader = this.setTextHeader.bind(this);
   }
   public isIconOpen(open: any) {

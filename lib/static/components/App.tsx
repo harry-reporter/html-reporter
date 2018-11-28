@@ -8,7 +8,7 @@ import Header from './Header/Header';
 import AccordeonMain from './AccordeonMain/AccordeonMain';
 import AccordeonSubBox from './AccordeonSubBox/AccordeonSubBox';
 
-import data from './data.js';
+import data from './dataNew.js';
 
 interface AppProps {}
 

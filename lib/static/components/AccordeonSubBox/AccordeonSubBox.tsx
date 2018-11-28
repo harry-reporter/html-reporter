@@ -1,13 +1,15 @@
-import Octicon, { Check, ChevronDown, ChevronUp, X } from '@githubprimer/octicons-react';
+import Octicon, { Check, ChevronDown, ChevronUp, X, Code, ListOrdered, File, Eye } from '@githubprimer/octicons-react';
 
 import 'primer-box/index.scss';
 import * as React from 'react';
 import './AccordeonSubBox.css';
 import Pagination from '../Pagination/Pagination';
+import ButtonsGroup from '../ButtonsGroup/ButtonsGroup';
+import Buttons from '../Buttons/Buttons';
 
 interface IAccordeonProps {
   title: string;
-  type?: 'success' | 'failed';
+  status?: 'success' | 'failed';
 }
 
 interface IAccordeonState {
@@ -34,19 +36,37 @@ class AccordeonSubBox extends React.Component<IAccordeonProps, IAccordeonState> 
   public render() {
     return (
       <React.Fragment>
-        <div className='Box-header d-flex flex-justify-between'>
+        <div className='AccordeonSubBox Box-header d-flex flex-justify-between'>
           <div
-            className={`header d-flex flex-items-center text-${this.props.type == 'success' ? 'green' : 'red'} pl-1`}
+            className={`header d-flex flex-items-center text-${
+              this.props.status === 'success' ? 'green' : this.props.status === 'failed' ? 'red' : 'gray'
+            } pl-1`}
           >
             <div className='Box-btn-octicon'>
-              <Octicon icon={this.props.type == 'success' ? Check : X} />
+              <Octicon icon={this.props.status == 'success' ? Check : X} />
             </div>
             <h4 className='Box-title pl-2 Subhead-heading'>{this.props.title}</h4>
-            <Pagination />
+            <Pagination pages={9} />
           </div>
 
-          <div onClick={this.toggle} className='Box-summary text-gray pr-1'>
-            <Octicon icon={this.state.isOpen ? ChevronUp : ChevronDown} />
+          <div className='Accordeon-Controls d-flex flex-items-center flex-justify-end text-grey'>
+            <div className='Box-GroupTestView pr-2'>
+              <ButtonsGroup
+                btns={[{ title: '', icon: Code }, { title: '', icon: ListOrdered }, { title: '', icon: File }]}
+              />
+            </div>
+            <div className='Box-GroupTestControls pr-2'>
+              <ButtonsGroup btns={[{ title: 'Skip' }, { title: 'Accept' }]} />
+            </div>
+            <div className='Box-View pr-1'>
+              <Buttons title={'View'} />
+            </div>
+            <div className='Box-Eye text-gray pl-3'>
+              <Octicon icon={Eye} />
+            </div>
+            <div onClick={this.toggle} className='Box-summary text-gray pr-1 pl-3'>
+              <Octicon icon={this.state.isOpen ? ChevronUp : ChevronDown} />
+            </div>
           </div>
         </div>
         <div className={`Box-body${this.state.isOpen ? '' : '_isHidden'}`}>{this.props.children}</div>
