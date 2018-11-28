@@ -1,4 +1,13 @@
-import Octicon, { Check, ChevronDown, ChevronUp, X, Code, ListOrdered, File, Eye } from '@githubprimer/octicons-react';
+import Octicon, {
+  Check,
+  ChevronDown,
+  ChevronUp,
+  X,
+  Code,
+  ListUnordered,
+  File,
+  Eye,
+} from '@githubprimer/octicons-react';
 
 import 'primer-box/index.scss';
 import * as React from 'react';
@@ -52,7 +61,7 @@ class AccordeonSubBox extends React.Component<IAccordeonProps, IAccordeonState> 
           <div className='Accordeon-Controls d-flex flex-items-center flex-justify-end text-grey'>
             <div className='Box-GroupTestView pr-2'>
               <ButtonsGroup
-                btns={[{ title: '', icon: Code }, { title: '', icon: ListOrdered }, { title: '', icon: File }]}
+                btns={[{ title: '', icon: Code }, { title: '', icon: ListUnordered }, { title: '', icon: File }]}
               />
             </div>
             <div className='Box-GroupTestControls pr-2'>
