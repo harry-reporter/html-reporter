@@ -1,12 +1,21 @@
 import * as React from 'react';
-import { ButtonSt } from './styles';
+import cn from 'classnames';
+import 'primer-buttons/build/build.css';
 
 import { ButtonProps } from './types';
 
-const Button: React.SFC<ButtonProps> = (props) => {
+const Button: React.SFC<ButtonProps> = ({ children, className, asLink, ...restProps }) => {
+  const cnButton = cn(className, { btn: !asLink, 'btn-link': asLink });
+
   return (
-    <ButtonSt {...props}>{props.children}</ButtonSt>
+    <button {...restProps} className={cnButton} type={'button'}>
+      {children}
+    </button>
   );
+};
+
+Button.defaultProps = {
+  asLink: false,
 };
 
 export default Button;

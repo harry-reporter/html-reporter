@@ -16,10 +16,18 @@ module.exports = {
         path: staticPath
     },
     resolve: {
-        extensions: ['.tsx', '.ts', '.js']
+        extensions: ['.tsx', '.ts', '.js'],
+        alias: {
+            src: staticPath
+        }
     },
     module: {
         rules: [
+            {
+                test: /\.tsx?$/,
+                use: 'ts-loader',
+                exclude: /node_modules/
+            },
             {
                 test: /\.css$/,
                 loader: ExtractTextPlugin.extract({
@@ -29,11 +37,6 @@ module.exports = {
                         options: {minimize: true}
                     }]
                 })
-            },
-            {
-                test: /\.tsx?$/,
-                use: 'ts-loader',
-                exclude: /node_modules/
             }
         ]
     },
