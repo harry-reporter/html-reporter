@@ -3,7 +3,8 @@ import * as React from 'react';
 import Clipboard from 'react-clipboard.js';
 import Octicon, { Clippy } from '@githubprimer/octicons-react';
 
-import { IButtonCopy } from '../types';
+import { IButtonCopy } from './types';
+import './ButtonCopy.css';
 
 class ButtonCopy extends React.Component<IButtonCopy> {
   constructor(props) {
@@ -16,7 +17,7 @@ class ButtonCopy extends React.Component<IButtonCopy> {
 
   public render() {
     return (
-      <div className='text-gray' aria-label='Copy' data-copied-hint='Copied!'>
+      <div className='Button_isCopy text-gray tooltipped tooltipped-sw' aria-label='Copy' data-copied-hint='Copied!'>
         <Clipboard component='div' option-text={this.getText}>
           <Octicon icon={Clippy} />
         </Clipboard>

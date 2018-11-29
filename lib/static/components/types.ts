@@ -19,10 +19,6 @@ export interface IBoxViewState {
   image?: any;
 }
 
-export interface IButtonCopy {
-  textToCopy: string;
-}
-
 export interface IButtonsProps {
   title: string;
   icon?: any;
@@ -37,17 +33,21 @@ export interface IHeaderProps {
   [key: string]: number;
 }
 
-export interface IViewAssertsProps {
-  stateName: string;
-  refImagePath: string;
-  status: 'success' | 'fail';
-  expectedPath: string;
-}
+export interface IIt {
+  name: string;
+  result: {
+    suiteUrl: string;
+    name: string;
+    metaInfo: {
+      url: string;
+      file: string;
+      sessionId: string;
+    };
+    imagesInfo: [{ stateName: string; refImagePath: string; status: string; expectedPath: string }];
 
-export interface IBoxViewAssertsProps {
-  imagesInfo: IViewAssertsProps[];
-}
-
-export interface IBoxViewAssertsState {
-  imagesInfo: IViewAssertsProps[];
+    screenshot: boolean;
+    multipleTabs: boolean;
+    status: 'success' | 'fail';
+    attempt: number;
+  };
 }

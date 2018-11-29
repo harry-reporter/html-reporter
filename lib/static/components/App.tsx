@@ -10,6 +10,8 @@ import AccordeonSubBox from './AccordeonSubBox/AccordeonSubBox';
 import 'primer/build/build.css';
 
 import { data } from './data.js';
+import { string } from 'prop-types';
+import { IIt } from './types';
 
 interface AppProps {}
 
@@ -22,7 +24,9 @@ function findChildren(object) {
       obj = findChildren(elem);
       newListTest.push(obj);
     });
-  } else return object;
+  } else {
+    return object;
+  }
   return obj;
 }
 
@@ -32,15 +36,18 @@ function getNewListTest() {
   });
 }
 
+function renderSubAccorderon(describeArray: IIt[]) {
+  return describeArray.map((it, index) => {
+    return <AccordeonSubBox title={it.name} status={it.result.status} key={index} />;
+  });
+}
+
 function renderAccorderon() {
   getNewListTest();
-  console.log(newListTest);
   return newListTest.map((describe, index) => {
     return (
       <AccordeonMain title={describe.suitePath.join(' / ')} status={describe.status} key={index}>
-        {describe.browsers.map((it, index) => {
-          return <AccordeonSubBox title={it.name} status={it.result.status} key={index} />;
-        })}
+        {renderSubAccorderon(describe.browsers)}
       </AccordeonMain>
     );
   });
@@ -58,7 +65,6 @@ const App: React.SFC<AppProps> = () => {
             skipped={data.suites.skipped}
             retries={data.suites.retries}
           />
-          {console.log(data)}
           {renderAccorderon()}
           <button className={'btn'}>что-то</button>
           <GlobalStyle />
