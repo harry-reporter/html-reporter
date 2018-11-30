@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
 
-import { reducer as exampleReducer } from './example/reducer';
-import { RootStore, StoreKey } from '../types/store';
+import { reducer as testFeaturesReducer } from './testFeatures/reducer';
+import { RootStore } from '../types/store';
 
 export const rootReducer = combineReducers<RootStore>({
-  example: exampleReducer,
+  testFeatures: testFeaturesReducer,
 });
 
 export default rootReducer;
