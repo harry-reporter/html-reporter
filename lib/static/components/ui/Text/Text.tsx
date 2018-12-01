@@ -2,6 +2,8 @@ import * as React from 'react';
 import cn from 'classnames';
 
 import { TextProps } from './types';
+import { withMargin } from 'src/components/hoc/withMargin';
+import { withPadding } from 'src/components/hoc/withPadding';
 
 const Text: React.SFC<TextProps> = ({ as: Tag, children, className, textColor, textType }) => {
   const cnText = cn(className, `text-${textType}`, `text-${textColor}`);
@@ -17,4 +19,4 @@ Text.defaultProps = {
   textColor: 'gray-dark',
 };
 
-export default Text;
+export default withPadding(withMargin(Text));

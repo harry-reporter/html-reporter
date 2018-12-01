@@ -1,9 +1,9 @@
-import { ExampleStore } from '../modules/example/types';
+import { TestFeaturesStore } from '../modules/testFeatures/types';
 
 export enum StoreKey {
-  example = 'example',
+  testFeatures = 'testFeatures',
 }
 
 export type RootStore = {
-  [StoreKey.example]: ExampleStore;
+  [StoreKey.testFeatures]: TestFeaturesStore;
 };
