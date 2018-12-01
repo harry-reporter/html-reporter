@@ -15,6 +15,11 @@ class Pagination extends React.Component<PaginationProps, PaginationState> {
     currentPage: 1,
   };
 
+  public componentDidMount(): void {
+    const { defaultCurrentPage } = this.props;
+    this.setState({ currentPage: defaultCurrentPage });
+  }
+
   public handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     const { hasPreventDefault } = this.props;
 

@@ -6,6 +6,7 @@ export interface PaginationProps {
   dataList?: SunNav[];
   maxPage?: number;
   hasPreventDefault?: boolean;
+  defaultCurrentPage?: number;
 
   onChange?: (currentPage: number) => any;
 }

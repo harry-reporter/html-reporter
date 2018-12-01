@@ -22,12 +22,13 @@ const Status: React.SFC<StatusProps> = (props) => {
 
   const isFail = status === 'fail';
   const statusColor: ColorType = isFail ? 'red' : 'green';
+  const maxPage = data.retries.length + 1;
 
   return (
     <Text className={cnStatus} textColor={statusColor} textType={'bold'}>
       <StatusIcon mr={2} isFail={isFail} />
       <Text as={'span'} textType={'bold'} textColor={statusColor} mr={3}>{title}</Text>
-      <Pagination hasPreventDefault={true} maxPage={data.attempt + 1} />
+      <Pagination defaultCurrentPage={maxPage} hasPreventDefault={true} maxPage={maxPage} />
     </Text>
   );
 };

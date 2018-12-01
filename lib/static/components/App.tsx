@@ -9,7 +9,7 @@ import Header from './layouts/Header/Header';
 import Main from 'src/components/layouts/Main';
 import NavigationPanel from 'src/components/modules/NavigationPanel/NavigationPanel';
 import Title from 'src/components/ui/Title/Title';
-import TestBox from 'src/components/modules/TestBox/TestBox';
+import TestsContainer from 'src/components/modules/TestsContainer/TestsContainer';
 
 interface AppProps {}
 
@@ -23,7 +23,7 @@ const App: React.SFC<AppProps> = () => {
           </Header>
           <Main pl={3} pr={3}>
             <NavigationPanel />
-            <TestBox />
+            <TestsContainer />
           </Main>
           <GlobalStyle />
         </>
