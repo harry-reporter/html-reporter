@@ -25,7 +25,7 @@ function getNewListTest() {
 getNewListTest();
 
 const defaultState: any = {
-  ...newListTest,
+  tests: newListTest,
 };
 
 const SET_INIT = 'SET_INIT';

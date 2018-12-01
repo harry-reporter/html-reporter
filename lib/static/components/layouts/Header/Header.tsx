@@ -1,4 +1,5 @@
 import * as React from 'react';
+import cn from 'classnames';
 import { withPadding } from 'src/components/hoc/withPadding';
 
 interface HeaderProps {
@@ -7,8 +8,9 @@ interface HeaderProps {
 }
 
 const Header: React.SFC<HeaderProps> = ({ children, className }) => {
+  const cnHeader = cn(className, 'pt-2');
   return (
-    <header className={className}>{children}</header>
+    <header className={cnHeader}>{children}</header>
   );
 };
 

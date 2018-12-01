@@ -8,7 +8,7 @@ interface MainProps {
 }
 
 const Main: React.SFC<MainProps> = ({ children, className }) => {
-  const cnMain = cn('d-flex', 'flex-column', className);
+  const cnMain = cn('d-flex', 'flex-column',  className);
   return (
     <main className={cnMain}>
       {children}

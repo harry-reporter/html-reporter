@@ -11,6 +11,14 @@ class Feature extends React.Component<FeatureProps, FeatureState> {
     isOpen: true,
   };
 
+  public componentDidMount(): void {
+    const { data } = this.props;
+
+    this.setState({
+      isOpen: data.status === 'fail',
+    });
+  }
+
   public toggleFeature = () => {
     this.setState((prevState) => ({ isOpen: !prevState.isOpen }));
   }
@@ -18,13 +26,14 @@ class Feature extends React.Component<FeatureProps, FeatureState> {
   public render(): JSX.Element {
     const { data } = this.props;
     const { isOpen } = this.state;
+    const { name } = data;
 
     return (
       <div className={'Box'}>
         <Header
           p={3}
           data={data}
-          title={data.title}
+          title={name}
           isOpenedFeature={isOpen}
           status={data.status}
           onToggle={this.toggleFeature}
