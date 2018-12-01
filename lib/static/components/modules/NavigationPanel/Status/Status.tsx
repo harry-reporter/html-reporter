@@ -17,4 +17,4 @@ const Status: React.SFC<StatusProps> = ({ name, value, color, className }) => {
   );
 };
 
-export default withMargin<StatusProps>(Status, 'mr-3');
+export default withMargin<StatusProps>(Status);
