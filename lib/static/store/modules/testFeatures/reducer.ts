@@ -1,8 +1,31 @@
 import { TestFeaturesStore } from './types';
-import dataNew from '../../mocks/dataNew.js';
+import data from '../../mocks/data.js';
 
-const defaultState: TestFeaturesStore = {
-  ...dataNew,
+const newListTest = [];
+
+function findChildren(object) {
+  let obj;
+  if (object.children) {
+    object.children.map((elem) => {
+      obj = findChildren(elem);
+      newListTest.push(obj);
+    });
+  } else {
+    return object;
+  }
+  return obj;
+}
+
+function getNewListTest() {
+  data.suites.map((elem) => {
+    findChildren(elem);
+  });
+}
+
+getNewListTest();
+
+const defaultState: any = {
+  ...newListTest,
 };
 
 const SET_INIT = 'SET_INIT';

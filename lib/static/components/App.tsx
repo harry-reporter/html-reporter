@@ -10,14 +10,13 @@ import Main from 'src/components/layouts/Main';
 import NavigationPanel from 'src/components/modules/NavigationPanel/NavigationPanel';
 import Title from 'src/components/ui/Title/Title';
 import TestBox from 'src/components/modules/TestBox/TestBox';
-// todo: решить конфликт import Header from './Header/Header';
-import Header2 from './Header2/Header2';
+
 import AccordeonMain from './AccordeonMain/AccordeonMain';
 import AccordeonSubBox from './AccordeonSubBox/AccordeonSubBox';
 
-import { data } from './data.js';
-import { string } from 'prop-types';
+import data from './data.js';
 import { IIt } from './types';
+import BoxViewError from './BoxViewError/BoxViewError';
 
 interface AppProps {}
 
@@ -72,13 +71,6 @@ const App: React.SFC<AppProps> = () => {
             <NavigationPanel />
             <TestBox />
           </Main>
-          <Header2
-            total={data.total}
-            passed={data.passed}
-            failed={data.suites.failed}
-            skipped={data.suites.skipped}
-            retries={data.suites.retries}
-          />
 
           {renderAccorderon()}
           <button className={'btn'}>что-то</button>

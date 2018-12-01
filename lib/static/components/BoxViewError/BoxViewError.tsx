@@ -1,10 +1,10 @@
 import './BoxViewError.css';
 
 import * as React from 'react';
-import { IBoxView } from '../BoxView/types';
+import { IBoxViewError } from '../BoxViewError/types';
 import { cn } from '@bem-react/classname';
 
-export default class BoxViewError extends React.Component<IBoxView> {
+export default class BoxViewError extends React.Component<IBoxViewError> {
   public cnBVE = cn(this.props.className);
   public render() {
     return (
@@ -24,7 +24,7 @@ export default class BoxViewError extends React.Component<IBoxView> {
           </div>
         </div>
         <div className='BoxViewError-ImageBox'>
-          <img src={this.props.image} alt='ImageBox-Image Error Test' className='border border-red' />
+          <img src={this.props.image} alt='ImageBox-Image Error Test' className='BoxViewError-Img border border-red' />
         </div>
       </div>
     );

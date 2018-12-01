@@ -15,12 +15,25 @@ import { IViewAssertsProps } from '../BoxViewAsserts/types';
 
 class AccordeonSubBox extends React.Component<IAccordeonProps, IAccordeonState> {
   public testImage: IViewAssertsProps = {
-    actualPath: 'images/0d7494d/plain/chrome~current_0.png',
-    diffPath: 'images/0d7494d/plain/chrome~diff_0.png',
+    actualPath: 'images/c49276d/plain/chrome~current_6.png',
+    diffPath: 'images/c49276d/plain/chrome~diff_6.png',
     expectedPath: 'images/c49276d/plain/chrome~ref_6.png',
-    refImagePath: './hermione/screens/c49276d/chrome/plain.png',
-    stateName: 'lang-popup',
+    refImagePath: '/images/screens/c49276d/firefox/plain.png',
+    stateName: 'plain',
+    status: 'error',
+    reason: {
+      message: 'can not find reference image at /images/c49276d/firefox/testName.png for "testName" state',
+      stack:
+        'NoRefImageError: can not find reference image at /images/c49276d/firefox/testName.png for "testName" state\n    at Function.fromObject (/Users/olga/Documents/ШРИ/Домашние работы/lesson5/node_modules/hermione/lib/browser/commands/assert-view/errors/no-ref-image-error.js:7:16)\n    at AssertViewResults.create.results.map (/Users/olga/Documents/ШРИ/Домашние работы/lesson5/node_modules/hermione/lib/browser/commands/assert-view/assert-view-results.js:10:73)\n    at Array.map (<anonymous>)\n    at Function.fromRawObject (/Users/olga/Documents/ШРИ/Домашние работы/lesson5/node_modules/hermione/lib/browser/commands/assert-view/assert-view-results.js:8:49)\n    at RegularTestRunner._applyTestResults (/Users/olga/Documents/ШРИ/Домашние работы/lesson5/node_modules/hermione/lib/runner/test-runner/regular-test-runner.js:60:59)\n    at RegularTestRunner.run (/Users/olga/Documents/ШРИ/Домашние работы/lesson5/node_modules/hermione/lib/runner/test-runner/regular-test-runner.js:30:18)',
+    },
+  };
+  public testDiffImages: IViewAssertsProps = {
+    stateName: 'plain',
+    refImagePath: '/images/screens/c49276d/firefox/plain.png',
     status: 'fail',
+    actualPath: 'images/c49276d/plain/firefox~current_6.png',
+    expectedPath: 'images/c49276d/plain/firefox~ref_6.png',
+    diffPath: 'images/c49276d/plain/firefox~diff_6.png',
   };
 
   public btns = [
@@ -48,6 +61,10 @@ class AccordeonSubBox extends React.Component<IAccordeonProps, IAccordeonState> 
   public getTextColor() {
     return this.props.status === 'success' ? 'green' : this.props.status === 'fail' ? 'red' : 'gray';
   }
+
+  public testMessage = this.testImage.reason.message;
+  public testStack = this.testImage.reason.stack;
+  public testImageUrl = this.testImage.refImagePath;
 
   public render() {
     return (
@@ -82,15 +99,24 @@ class AccordeonSubBox extends React.Component<IAccordeonProps, IAccordeonState> 
         <div className={`Box-body${this.state.isOpen ? '' : '_isHidden'} p-0`}>
           {this.props.children}
           <BoxView className='test' />
-          <BoxViewError className='testError' message='test' stack='stackProps' />
+          <BoxViewError
+            className='testError'
+            message={this.testMessage}
+            stack={this.testStack}
+            image={this.testImageUrl}
+          />
+
           <BoxViewAsserts
             className='view'
-            imageInfo={this.testImage}
-            stateName={this.testImage.stateName}
-            status={this.testImage.status}
-            refImagePath={this.testImage.refImagePath}
-            expectedPath={this.testImage.expectedPath}
+            imageInfo={this.testDiffImages}
+            stateName={this.testDiffImages.stateName}
+            status={this.testDiffImages.status}
+            refImagePath={this.testDiffImages.refImagePath}
+            expectedPath={this.testDiffImages.expectedPath}
+            diffPath={this.testDiffImages.diffPath}
+            actualPath={this.testDiffImages.actualPath}
           />
+
           <BoxView className='code' types='code' />
           <BoxView className='files' types='files' />
         </div>

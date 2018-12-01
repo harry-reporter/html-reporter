@@ -7,7 +7,7 @@ export interface IViewAssertsProps {
   diffPath?: string;
 }
 
-export interface IBoxView {
+export interface IBoxViewError {
   className: string;
   types?: 'viewAsserts' | 'files' | 'code' | 'error';
   imagesInfo?: IViewAssertsProps[];
