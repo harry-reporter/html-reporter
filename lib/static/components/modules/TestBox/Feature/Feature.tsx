@@ -31,7 +31,9 @@ class Feature extends React.Component<FeatureProps, FeatureState> {
     return (
       <div className={'Box'}>
         <Header
-          p={3}
+          p={2}
+          pl={3}
+          pr={3}
           data={data}
           title={name}
           isOpenedFeature={isOpen}
