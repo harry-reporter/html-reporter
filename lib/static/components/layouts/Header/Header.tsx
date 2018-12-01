@@ -8,7 +8,8 @@ interface HeaderProps {
 }
 
 const Header: React.SFC<HeaderProps> = ({ children, className }) => {
-  const cnHeader = cn(className, 'pt-2');
+  const cnHeader = cn(className);
+
   return (
     <header className={cnHeader}>{children}</header>
   );

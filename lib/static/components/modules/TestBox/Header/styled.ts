@@ -20,3 +20,7 @@ export const ButtonIconContainerStyled = styled.div`
     cursor: pointer;
   }
 `;
+
+export const HeaderContainerStyled = styled.div`
+  background-color: #fff;
+`;

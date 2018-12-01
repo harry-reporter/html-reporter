@@ -4,10 +4,11 @@ import CodeViewer from './CodeViewer';
 import ScreenshotViewer from './ScreenshotViewer';
 import ScriptViewer from './ScriptViewer';
 
+import { ViewerStyled } from './styled';
 import { ViewerProps } from './types';
 
 const Viewer: React.SFC<ViewerProps> = (props) => {
-  let ViewerWrapper: any = null;
+  let ViewerWrapper: React.ComponentType = null;
 
   switch (props.type) {
     case 'code':
@@ -22,9 +23,9 @@ const Viewer: React.SFC<ViewerProps> = (props) => {
   }
 
   return (
-    <div className={'Box-row'}>
+    <ViewerStyled className={'Box-row'}>
       <ViewerWrapper {...props} />
-    </div>
+    </ViewerStyled>
   );
 };
 
