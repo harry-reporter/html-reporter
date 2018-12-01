@@ -32,10 +32,12 @@ module.exports = {
                 test: /\.css$/,
                 loader: ExtractTextPlugin.extract({
                     fallback: 'style-loader',
-                    use: [{
-                        loader: 'css-loader',
-                        options: {minimize: true}
-                    }]
+                    use: [
+                        {
+                            loader: 'css-loader',
+                            options: {minimize: true}
+                        }
+                    ]
                 })
             }
         ]
