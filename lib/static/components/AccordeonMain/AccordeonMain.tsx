@@ -1,18 +1,22 @@
-import Octicon, { ChevronDown, ChevronUp, Clippy } from '@githubprimer/octicons-react';
-
 import * as React from 'react';
-import './AccordeonMain.css';
+
+import Octicon, { ChevronDown, ChevronUp, Clippy } from '@githubprimer/octicons-react';
 import { Buttons } from '../Buttons';
+
 import { IAccordeonProps, IAccordeonState } from '../types';
+import './AccordeonMain.css';
 
 class AccordeonMain extends React.Component<IAccordeonProps, IAccordeonState> {
+  // todo: getDerrivedStateFrom Props для проброса пропсов в стайт
+  // убрать
   constructor(props: IAccordeonProps) {
     super(props);
     this.state = { isOpen: true };
   }
-  public isIconOpen(open: any) {
+  public iconOpen(open: any) {
     return open ? ChevronUp : ChevronDown;
   }
+  // prevstate
   public toggle = () => {
     if (this.state.isOpen) {
       this.setState({ isOpen: false });
@@ -24,6 +28,12 @@ class AccordeonMain extends React.Component<IAccordeonProps, IAccordeonState> {
   // todo: подключить state redux для заголовка
   // public setTextHeader = () => {}
 
+  // компонеты Аккордеон-хедер, и т.д.
+  // text-color
+  // isOpen=this.props
+  // 1 props 2 state
+  // проверяем компоненту, возвращаем null, если hidden
+  // buttons
   public render() {
     return (
       <div className='Accorderon m-3 mt-4'>

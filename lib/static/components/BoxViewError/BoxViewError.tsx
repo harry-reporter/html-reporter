@@ -2,8 +2,7 @@ import './BoxViewError.css';
 
 import * as React from 'react';
 import { IBoxView } from '../BoxView/types';
-import { withBemMod, ModBody } from '@bem-react/core';
-import { classnames, cn } from '@bem-react/classname';
+import { cn } from '@bem-react/classname';
 
 export default class BoxViewError extends React.Component<IBoxView> {
   public cnBVE = cn(this.props.className);

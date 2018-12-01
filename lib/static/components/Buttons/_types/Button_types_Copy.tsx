@@ -15,7 +15,7 @@ const ButtonCopy: ModBody<IButtonCopyProps> = (Base, { className, textToCopy }) 
   const cnButtonCopy = cn(className);
   return (
     <div
-      className={classnames(cn(className)(), 'btn', 'text-gray', 'tooltipped', 'tooltipped-sw')}
+      className={classnames(cn(className)(), 'text-gray', 'tooltipped', 'tooltipped-sw')}
       aria-label='Copy'
       data-copied-hint='Copied!'
     >

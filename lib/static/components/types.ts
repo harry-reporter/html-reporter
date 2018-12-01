@@ -39,3 +39,4 @@ export interface IIt {
     attempt: number;
   };
 }
+export type TestStatus = 'fail' | 'success';
