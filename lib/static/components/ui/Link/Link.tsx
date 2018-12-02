@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { classnames } from '@bem-react/classname';
+import classnames = require('classnames');
 
 interface ILinkProps {
   className?: string;

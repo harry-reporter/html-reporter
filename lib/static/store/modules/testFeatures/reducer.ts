@@ -1,5 +1,5 @@
 import { TestFeaturesStore } from './types';
-import data from '../../mocks/data.js';
+import data from '../../mocks/dataTest.js';
 
 const newListTest = [];
 
@@ -37,6 +37,7 @@ export const reducer = (state: TestFeaturesStore = defaultState, action): TestFe
     case `${SET_INIT}`:
       return { ...state };
 
-    default: return state;
+    default:
+      return state;
   }
 };
