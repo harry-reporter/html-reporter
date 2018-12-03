@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-// import ImageDiff from 'image-diff-view';
+import ImageDiff from 'image-diff-view';
 
 import { IImagesInfo } from '../types';
 import './FailBox.css';
@@ -29,12 +29,11 @@ export default class FailBox extends React.Component<IImagesInfo, IFailBoxState>
   }
 
   public getBoxContentSwipe() {
-    /*const imageDiff = new ImageDiff(this, this.props.expectedPath, this.props.actualPath, 'swipe');
+    const imageDiff = new ImageDiff(this, this.props.expectedPath, this.props.actualPath, 'swipe');
     imageDiff.swipe(0.5);
     imageDiff.update(this.props.expectedPath, this.props.actualPath, 'fade');
     imageDiff.fade(0.8);
     imageDiff.tune(0.4); // abstract tune method rather than fade/swipe()
-    */
     return (
       <>
         <div>test</div>
@@ -78,6 +77,19 @@ export default class FailBox extends React.Component<IImagesInfo, IFailBoxState>
         </nav>
       </>
     );
+  }
+  public getView() {
+    switch (this.state.tabId) {
+      case 0:
+        this.getBoxContent();
+        break;
+      case 1:
+        this.getBoxContentDiff();
+        break;
+      case 2:
+        this.getBoxContentSwipe();
+        break;
+    }
   }
 
   public render(): JSX.Element {
