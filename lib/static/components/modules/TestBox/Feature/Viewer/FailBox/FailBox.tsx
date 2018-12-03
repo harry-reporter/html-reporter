@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+// import ImageDiff from 'image-diff-view';
+
 import { IImagesInfo } from '../types';
 import './FailBox.css';
 
@@ -11,6 +13,7 @@ export default class FailBox extends React.Component<IImagesInfo, IFailBoxState>
   public state = {
     tabId: 0,
   };
+  public textModItem = ['2-up', 'Only Diff', 'Loupe', 'Swipe', 'Onion Skin'];
   public getBoxContent() {
     return (
       <>
@@ -20,6 +23,25 @@ export default class FailBox extends React.Component<IImagesInfo, IFailBoxState>
       </>
     );
   }
+
+  public getBoxContentDiff() {
+    return <>{this.getBoxItem('Diff', 'gray', this.props.diffPath)}</>;
+  }
+
+  public getBoxContentSwipe() {
+    /*const imageDiff = new ImageDiff(this, this.props.expectedPath, this.props.actualPath, 'swipe');
+    imageDiff.swipe(0.5);
+    imageDiff.update(this.props.expectedPath, this.props.actualPath, 'fade');
+    imageDiff.fade(0.8);
+    imageDiff.tune(0.4); // abstract tune method rather than fade/swipe()
+    */
+    return (
+      <>
+        <div>test</div>
+      </>
+    );
+  }
+
   public getBoxItem(cn: string, color: string, imgPath: string) {
     return (
       <div className={cn}>
@@ -28,7 +50,7 @@ export default class FailBox extends React.Component<IImagesInfo, IFailBoxState>
       </div>
     );
   }
-  // todo: добавить selected по state.tabId
+
   public getViewModItem(textItems: string[]) {
     const { tabId } = this.state;
     return textItems.map((item, index) => {
@@ -48,7 +70,6 @@ export default class FailBox extends React.Component<IImagesInfo, IFailBoxState>
   public handleClickAtTab = (id: number) => {
     return () => this.setState({ tabId: id });
   }
-  public textModItem = ['2-up', 'Only Diff', 'Loupe', 'Swipe', 'Onion Skin'];
   public getViewMod() {
     return (
       <>
