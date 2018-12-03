@@ -11,7 +11,7 @@ class ButtonsGroup extends React.Component<IButtonsGroupProps> {
     const { btns } = this.props;
 
     return btns.map((btn, id) => (
-      <Button className={'BtnGroup-item'} key={id} icon={btn.icon} onClick={btn.onClick}>{btn.title}</Button>
+      <Button className={'BtnGroup-item'} key={id} {...btn}>{btn.title}</Button>
     ));
   }
 

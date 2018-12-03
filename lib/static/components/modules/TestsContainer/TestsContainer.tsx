@@ -12,7 +12,7 @@ class TestsContainer extends React.Component<TestsContainerProps, TestsContainer
 
     return (
       <div className={'pt-5'}>
-        {tests.map((test) => (<TestBox data={test} />))}
+        {tests.map((test, id) => (<TestBox key={id} data={test} />))}
       </div>
     );
   }
