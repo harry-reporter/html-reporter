@@ -8,6 +8,7 @@ import GlobalStyle from './GlobalStyle';
 import Header from './layouts/Header/Header';
 import Main from 'src/components/layouts/Main';
 import NavigationPanel from 'src/components/modules/NavigationPanel/NavigationPanel';
+import ControlPanel from 'src/components/modules/ControlPanel';
 import Title from 'src/components/ui/Title/Title';
 import TestsContainer from 'src/components/modules/TestsContainer/TestsContainer';
 
@@ -23,6 +24,7 @@ const App: React.SFC<AppProps> = () => {
           </Header>
           <Main pl={3} pr={3}>
             <NavigationPanel />
+            <ControlPanel />
             <TestsContainer />
           </Main>
           <GlobalStyle />
