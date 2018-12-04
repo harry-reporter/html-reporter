@@ -3,8 +3,8 @@ import * as React from 'react';
 import CodeViewer from './CodeViewer';
 import ScreenshotViewer from './ScreenshotViewer';
 import ScriptViewer from './ScriptViewer';
-
 import { ViewerStyled } from './styled';
+
 import { ViewerProps } from './types';
 
 const Viewer: React.SFC<ViewerProps> = (props) => {
