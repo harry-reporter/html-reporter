@@ -3,30 +3,23 @@ import * as React from 'react';
 import CodeViewer from './CodeViewer';
 import ScreenshotViewer from './ScreenshotViewer';
 import ScriptViewer from './ScriptViewer';
-import { ViewerStyled } from './styled';
 
-import { ViewerProps } from './types';
+import { IViewerProps } from './types';
 
-const Viewer: React.SFC<ViewerProps> = (props) => {
-  let ViewerWrapper: React.ComponentType = null;
-
+const Viewer: React.SFC<IViewerProps> = (props) => {
+  let ViewerWrapper: any = null;
   switch (props.type) {
     case 'code':
       ViewerWrapper = CodeViewer;
       break;
-    case 'screenshot':
-      ViewerWrapper = ScreenshotViewer;
-      break;
-    case 'script':
+    case 'tests':
       ViewerWrapper = ScriptViewer;
       break;
+    default:
+      ViewerWrapper = props.result.imagesInfo.length > 0 ? ScreenshotViewer : ScriptViewer;
   }
 
-  return (
-    <ViewerStyled className={'Box-row'}>
-      <ViewerWrapper {...props} />
-    </ViewerStyled>
-  );
+  return <ViewerWrapper {...props} />;
 };
 
 export default Viewer;

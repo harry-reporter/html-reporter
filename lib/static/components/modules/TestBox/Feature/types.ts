@@ -1,7 +1,7 @@
 import { Browser } from 'src/store/modules/testFeatures/types';
 
 export interface FeatureProps {
-  data: Browser;
+  data: any;
 }
 export interface FeatureState {
   isOpen: boolean;
