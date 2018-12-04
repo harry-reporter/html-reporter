@@ -1,10 +1,11 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
+import { getTestsByType } from './selectors';
 
 import TestBox from 'src/components/modules/TestBox/TestBox';
 
 import { RootStore } from 'src/store/types/store';
-import { TestsContainerProps, TestsContainerState } from 'src/components/modules/TestsContainer/types';
+import { TestsContainerProps, TestsContainerState } from './types';
 
 class TestsContainer extends React.Component<TestsContainerProps, TestsContainerState> {
   public render(): JSX.Element {
@@ -18,6 +19,6 @@ class TestsContainer extends React.Component<TestsContainerProps, TestsContainer
   }
 }
 
-export default connect((state: RootStore) => ({
-  tests: state.testFeatures.tests,
+export default connect(({ tests, app}: RootStore) => ({
+  tests: getTestsByType(tests.tests, tests.skips, app.selectedTestsType),
 }))(TestsContainer);

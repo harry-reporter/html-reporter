@@ -1,10 +1,20 @@
 export type TestStatus = 'error' | 'fail' | 'success';
 
-export interface TestFeaturesStore {
-  tests: any[];
+export interface TestsStore {
+  tests: Suite[];
+  skips: Suite[];
+  stats: Stats;
 }
 
-export interface TestData {
+export interface Stats {
+  total: number;
+  passed: number;
+  failed: number;
+  skipped: number;
+  retries: number;
+}
+
+export interface CompiledData extends Stats {
   skips: Skip[];
   config: Config;
   suites: Suite[];
@@ -45,10 +55,15 @@ export interface MetaInfo {
   file: string;
   sessionId: string;
 }
+
 export interface ImageInfo {
   stateName: string;
   status: string;
   actualPath: string;
   imagePath: string;
   expectedPath: string;
+}
+
+export interface WindowWithData extends Window {
+  data: CompiledData;
 }
