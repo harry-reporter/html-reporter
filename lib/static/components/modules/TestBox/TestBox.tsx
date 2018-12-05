@@ -10,24 +10,16 @@ class TestBox extends React.Component<TestBoxProps, TestBoxState> {
     isOpen: true,
   };
 
-  public componentDidMount(): void {
-    const { data } = this.props;
-
-    this.setState({
-      isOpen: data.status === 'fail',
-    });
-  }
-
   public toggleBox = () => {
     this.setState((prevState) => ({ isOpen: !prevState.isOpen }));
   }
 
   public getSuite = (suitePath) => suitePath.join(' / ');
 
-  public renderFeatures = (): JSX.Element => {
+  public renderFeatures = (): any => {
     const { data } = this.props;
 
-    return data.browsers.map((item: any, id: number) => <Feature key={id} data={item} />);
+    return data.browsers.map((item, id) => <Feature key={id} data={item} />);
   }
 
   public render(): JSX.Element {
@@ -37,7 +29,7 @@ class TestBox extends React.Component<TestBoxProps, TestBoxState> {
     const suite = this.getSuite(data.suitePath);
 
     return (
-      <div className={'Box'}>
+      <div className={'Box mb-3'}>
         <Header title={suite} status={data.status} isOpenedBox={isOpen} onToggle={this.toggleBox} />
         {isOpen && this.renderFeatures()}
       </div>

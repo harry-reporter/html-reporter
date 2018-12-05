@@ -1,9 +1,9 @@
-import { TestFeaturesStore } from './types';
+import { TestFeaturesStore, TestData, Suite  } from './types';
 import data from '../../mocks/dataTest.js';
 
-const newListTest = [];
+const newListTest: any[] = [];
 
-function findChildren(object) {
+function findChildren(object: Suite) {
   let obj;
   if (object.children) {
     object.children.map((elem) => {
@@ -16,15 +16,15 @@ function findChildren(object) {
   return obj;
 }
 
-function getNewListTest() {
-  data.suites.map((elem) => {
+function getNewListTest(oldList: TestData) {
+  oldList.suites.map((elem) => {
     findChildren(elem);
   });
 }
 
-getNewListTest();
+getNewListTest(data);
 
-const defaultState: any = {
+const defaultState: TestFeaturesStore = {
   tests: newListTest,
 };
 

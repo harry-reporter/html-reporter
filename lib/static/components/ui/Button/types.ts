@@ -1,7 +1,9 @@
+import { Icon } from '@githubprimer/octicons-react';
+
 export interface ButtonProps {
   className?: string;
   asLink?: boolean;
-  icon?: any;
+  icon?: Icon;
   title?: string;
   isSelected?: boolean;
   size?: 'sm';

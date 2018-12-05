@@ -1,5 +1,7 @@
+import { Suite } from 'src/store/modules/testFeatures/types';
+
 export interface TestBoxProps {
-  data: any;
+  data: Suite;
 }
 export interface TestBoxState {
   isOpen: boolean;

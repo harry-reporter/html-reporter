@@ -1,47 +1,54 @@
-export type TestStatus = 'fail' | 'success';
+export type TestStatus = 'error' | 'fail' | 'success';
 
-export interface CheckAssert {
-  status: TestStatus;
-  title: string;
-  images?: {
-    expected: string;
-    actual: string;
-    diff: string;
-  };
+export interface TestFeaturesStore {
+  tests: any[];
 }
 
-export interface CheckMeta {
-  platform: string;
+export interface TestData {
+  skips: Skip[];
+  config: Config;
+  suites: Suite[];
+}
+
+export type Skip = any;
+export type SuitePath = string[];
+export interface Config {
+
+}
+export interface Suite {
+  name: string;
+  suitePath: SuitePath;
+  status: TestStatus;
+  children?: Suite[];
+  browsers?: Browser[];
+}
+
+export interface Browser {
+  name: string;
+  result: Attempt;
+  retries: Attempt[];
+}
+
+export interface Attempt {
+  suiteUrl: string;
+  name: string;
+  metaInfo: MetaInfo;
+  imagesInfo: ImageInfo[];
+  screenshot: boolean;
+  multipleTabs: boolean;
+  status: TestStatus;
+  attempt: number;
+}
+
+export interface MetaInfo {
   url: string;
   file: string;
   sessionId: string;
 }
-
-export interface CheckError {
-  message: string;
-  stack: string[];
-  image: string;
-}
-export interface Check {
-  status: TestStatus;
-  title: string;
-  attempt: number;
-  tab?: number;
-  error?: CheckError;
-  asserts?: CheckAssert;
-  meta?: CheckMeta;
-  code?: string;
-}
-
-export interface TestFeature {
-  title: string;
-  checks: Check[];
-}
-
-export interface TestFeaturesStore {
-  tests: TestFeature[];
-  passed: number;
-  failed: number;
-  skipped: number;
-  retries: number;
+export interface ImageInfo {
+  stateName: string;
+  status: string;
+  actualPath: string;
+  imagePath: string;
+  expectedPath: string;
 }
