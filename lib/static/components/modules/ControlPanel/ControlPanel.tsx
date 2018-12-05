@@ -4,6 +4,8 @@ import DropdownItem from 'src/components/ui/DropdownItem';
 import Button from 'src/components/ui/Button';
 import ControlPanelStyled from './styled';
 
+import 'src/styles.css';
+
 interface ControlPanelProps {}
 
 const ControlPanel: React.SFC<ControlPanelProps> = ({}) => {
