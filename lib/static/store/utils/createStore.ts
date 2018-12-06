@@ -1,9 +1,10 @@
 import { createStore as _createStore, applyMiddleware, compose, Store, StoreEnhancer } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import thunk from 'redux-thunk';
 import { RootStore } from '../types/store';
 
 export function createStore(reducer) {
-  const middleware = [];
+  const middleware = [thunk];
 
   const store: Store<RootStore> = _createStore(
     reducer,
