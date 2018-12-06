@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import Octicon, { ChevronDown, ChevronUp, Clippy } from '@githubprimer/octicons-react';
 import Text from 'src/components/ui/Text/Text';
-import { ClipboardStyled, ControlsStyled, ButtonIconContainerStyled } from './styled';
+import { ClipboardStyled, ControlsStyled, ButtonIconContainerStyled, HeaderContainerStyled } from './styled';
 
 import { HeaderProps, HeaderState } from './types';
 import { ColorType } from 'src/components/ui/types';
@@ -19,8 +19,8 @@ class Header extends React.PureComponent<HeaderProps, HeaderState> {
     const Chevron = this.getChevron();
 
     return (
-      <div className={'Box-header d-flex flex-justify-between flex-items-center'}>
-        <Text textColor={textColor} textType={'bold'}>
+      <HeaderContainerStyled className={'Box-header d-flex flex-justify-between flex-items-center p-3'}>
+        <Text as={'span'} textColor={textColor} textType={'bold'}>
           {title}
         </Text>
         <ControlsStyled>
@@ -31,7 +31,7 @@ class Header extends React.PureComponent<HeaderProps, HeaderState> {
             <Octicon icon={Chevron} />
           </ButtonIconContainerStyled>
         </ControlsStyled>
-      </div>
+      </HeaderContainerStyled>
     );
   }
 }

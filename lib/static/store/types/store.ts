@@ -5,5 +5,5 @@ export enum StoreKey {
 }
 
 export type RootStore = {
-  [StoreKey.testFeatures]: TestFeaturesStore;
+  [StoreKey.testFeatures]?: TestFeaturesStore;
 };
