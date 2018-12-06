@@ -10,7 +10,7 @@ interface IScreenshotViewerState {
   isOpen: boolean;
 }
 
-export default class ScreenshotViewer extends React.Component<IViewerProps, IScreenshotViewerState> {
+export default class ScreenshotViewer extends React.PureComponent<IViewerProps, IScreenshotViewerState> {
   constructor(props: IViewerProps) {
     super(props);
     this.state = { isOpen: this.props.result.status !== 'success' };
@@ -23,13 +23,13 @@ export default class ScreenshotViewer extends React.Component<IViewerProps, IScr
   public getViewBox(item: IImagesInfo) {
     let viewBoxWrap: any = null;
     if (item.status === 'success') {
-      viewBoxWrap = this.getSuccessBoxTemplate(item, <SuccessBox {...item} />);
+      viewBoxWrap = this.getSuccessBoxTemplate(item, <SuccessBox onLoad={this.props.onToggle} {...item} />);
     }
     if (item.status === 'fail') {
-      viewBoxWrap = this.getSuccessBoxTemplate(item, <FailBox {...item} />);
+      viewBoxWrap = this.getSuccessBoxTemplate(item, <FailBox onLoad={this.props.onToggle} {...item} />);
     }
     if (item.status === 'error') {
-      viewBoxWrap = <ErrorBox {...item} />;
+      viewBoxWrap = <ErrorBox onLoad={this.props.onToggle} {...item} />;
     }
 
     return viewBoxWrap;
@@ -51,7 +51,7 @@ export default class ScreenshotViewer extends React.Component<IViewerProps, IScr
 
   public renderViewBox = () => {
     return this.props.result.imagesInfo.map((item: IImagesInfo, id: number) => {
-      return <>{this.getViewBox(item)}</>;
+      return <React.Fragment key={id}>{this.getViewBox(item)}</React.Fragment>;
     });
   }
 
@@ -60,6 +60,6 @@ export default class ScreenshotViewer extends React.Component<IViewerProps, IScr
   }
   public onLinkClick = (e) => {
     e.preventDefault();
-    this.setState(({ isOpen }) => ({ isOpen: !isOpen }));
+    this.setState(({ isOpen }) => ({ isOpen: !isOpen }), this.props.onToggle);
   }
 }

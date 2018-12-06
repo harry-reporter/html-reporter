@@ -4,6 +4,7 @@ export interface IViewerProps {
   retries: IResultViewerProps[];
   type: 'code' | 'tests' | 'screenshot';
   className?: string;
+  onToggle?: any;
 }
 
 export interface IResultViewerProps {
@@ -26,6 +27,7 @@ export interface IImagesInfo {
   status: 'error' | 'success' | 'fail';
   expectedPath?: string;
   diffPath?: string;
+  onLoad?: any;
 }
 
 export interface IMetaInfo {

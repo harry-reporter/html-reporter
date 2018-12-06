@@ -47,7 +47,7 @@ module.exports = {
         }),
         new HtmlWebpackIncludeAssetsPlugin({
             files: ['index.html'],
-            assets: ['data.js'],
+            assets: ['dataBig.js'],
             append: false
         })
         // new BundleAnalyzerPlugin({
