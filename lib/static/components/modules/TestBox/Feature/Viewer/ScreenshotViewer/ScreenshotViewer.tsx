@@ -10,7 +10,7 @@ interface IScreenshotViewerState {
   isOpen: boolean;
 }
 
-export default class ScreenshotViewer extends React.Component<IResultViewerProps, IScreenshotViewerState> {
+export default class ScreenshotViewer extends React.PureComponent<IResultViewerProps, IScreenshotViewerState> {
   constructor(props: IResultViewerProps) {
     super(props);
     this.state = { isOpen: this.props.status !== 'success' };
