@@ -51,7 +51,7 @@ export default class ScreenshotViewer extends React.Component<IViewerProps, IScr
 
   public renderViewBox = () => {
     return this.props.result.imagesInfo.map((item: IImagesInfo, id: number) => {
-      return <>{this.getViewBox(item)}</>;
+      return <React.Fragment key={id}>{this.getViewBox(item)}</React.Fragment>;
     });
   }
 
