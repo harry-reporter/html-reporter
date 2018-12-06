@@ -6,21 +6,21 @@ import ScriptViewer from './ScriptViewer';
 
 import { IViewerProps } from './types';
 
-const Viewer: React.SFC<IViewerProps> = (props) => {
-  let ViewerWrapper: any = null;
+export default class Viewer extends React.PureComponent<IViewerProps> {
+  public render() {
+    let ViewerWrapper: any = null;
 
-  switch (props.type) {
-    case 'code':
-      ViewerWrapper = CodeViewer;
-      break;
-    case 'tests':
-      ViewerWrapper = ScriptViewer;
-      break;
-    default:
-      ViewerWrapper = props.result.imagesInfo.length > 0 ? ScreenshotViewer : ScriptViewer;
+    switch (this.props.type) {
+      case 'code':
+        ViewerWrapper = CodeViewer;
+        break;
+      case 'tests':
+        ViewerWrapper = ScriptViewer;
+        break;
+      default:
+        ViewerWrapper = this.props.result.imagesInfo.length > 0 ? ScreenshotViewer : ScriptViewer;
+    }
+
+    return <ViewerWrapper {...this.props.result} />;
   }
-
-  return <ViewerWrapper {...props.result} />;
-};
-
-export default Viewer;
+}

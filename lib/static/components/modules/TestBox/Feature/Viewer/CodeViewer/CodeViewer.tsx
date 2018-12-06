@@ -1,16 +1,8 @@
 import * as React from 'react';
 
-interface CodeViewerProps {
-  metaInfo: {
-    file: string;
-    sessionId: string;
-    url: string;
-    platform?: string;
-    textFile?: string;
-  };
-}
+import { ICodeViewerProps } from './types';
 
-export default class CodeViewer extends React.PureComponent<CodeViewerProps> {
+export default class CodeViewer extends React.PureComponent<ICodeViewerProps> {
   public render() {
     return (
       <>
