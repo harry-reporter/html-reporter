@@ -1,19 +1,7 @@
 import * as React from 'react';
+
+import './types';
 import './ImageDiffSwipe.css';
-
-interface IImageDiffSwipeProps {
-  height?: number;
-  width?: number;
-  after: string;
-  before: string;
-  value: number;
-  className?: string;
-}
-
-interface IImageDiffSwipeState {
-  maxHeight: number;
-  containerWidth: number;
-}
 
 export default class ImageDiffSwipe extends React.Component<IImageDiffSwipeProps, IImageDiffSwipeState> {
   public containerRef;

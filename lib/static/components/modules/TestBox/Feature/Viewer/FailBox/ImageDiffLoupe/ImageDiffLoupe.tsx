@@ -1,20 +1,10 @@
 import * as React from 'react';
 
-import '../ImageDiffLoupe/ImageDiffLoupe.css';
 import Loupe from './Loupe/Loupe';
 
-interface IImageDiffProps {
-  after: string;
-  before: string;
-  zoom: number;
-  className?: string;
-}
-interface IImageDiffState {
-  top: string;
-  left: string;
-  x: number;
-  y: number;
-}
+import '../ImageDiffLoupe/ImageDiffLoupe.css';
+import './types';
+
 const BORDERWIDTH = 3;
 
 export default class ImageDiffLoupe extends React.Component<IImageDiffProps, IImageDiffState> {

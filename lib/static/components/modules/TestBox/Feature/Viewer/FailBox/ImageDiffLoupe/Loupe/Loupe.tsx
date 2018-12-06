@@ -1,19 +1,7 @@
 import * as React from 'react';
 
 import './Loupe.css';
-
-interface ILoupeProps {
-  src: string;
-  width?: number;
-  height?: number;
-  zoom: number;
-  left?: string;
-  top?: string;
-  x: number;
-  y: number;
-  onMove: (e) => void;
-  ref?: any;
-}
+import './types';
 
 export default class Loupe extends React.Component<ILoupeProps, {}> {
   public BORDERWIDTH = 3;

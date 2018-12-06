@@ -1,13 +1,7 @@
 import * as React from 'react';
-import './ImageDiffOnionSkin.css';
 
-interface IImageDiffOnionSkin {
-  before: string;
-  after: string;
-  value: number;
-  className?: string;
-  width?: number;
-}
+import './types';
+import './ImageDiffOnionSkin.css';
 
 export default class ImageDiffOnionSkin extends React.Component<IImageDiffOnionSkin> {
   public render() {
