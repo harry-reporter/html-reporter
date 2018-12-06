@@ -14,13 +14,22 @@ const Status: React.SFC<StatusProps> = (props) => {
 
   const cnStatus = cn(className, 'd-flex flex-justify-between flex-items-center');
 
-  const isFail = status === 'fail';
+  const isFail = (status === 'fail') || (status === 'error');
   const statusColor: ColorType = isFail ? 'red' : 'green';
-  const maxPage = data.retries.length + 1;
+  const maxPage = data.result.attempt + 1;
+
   return (
     <Text as={'span'} className={cnStatus} textColor={statusColor} textType={'bold'}>
       <StatusIcon mr={2} isFail={isFail} />
-      <BrowserNameStyled as={'span'} textType={'bold'} textColor={statusColor} mr={6}>{title}</BrowserNameStyled>
+      <BrowserNameStyled
+        as={'span'}
+        textType={'bold'}
+        textColor={statusColor}
+        mr={6}
+        onClick={props.onClickAtTitle}
+      >
+        {title}
+      </BrowserNameStyled>
       <Text as={'span'} textColor={'gray'} mr={2}><i>Attempts:</i> </Text>
       <Pagination defaultCurrentPage={maxPage} hasPreventDefault={true} maxPage={maxPage} />
     </Text>

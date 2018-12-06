@@ -1,4 +1,4 @@
-import { Suite } from 'src/store/modules/testFeatures/types';
+import { Suite } from 'src/store/modules/tests/types';
 
 export interface TestsContainerProps {
   tests: Suite[];

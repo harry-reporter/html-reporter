@@ -10,12 +10,30 @@ import { HeaderProps } from './types';
 const Header: React.SFC<HeaderProps> = (props) => {
   const { className, status, title, isOpenedFeature, data } = props;
 
+  const handleClickAtHeader = (e) => {
+    if (e.target === e.currentTarget) {
+      props.onToggle();
+    }
+  }
+
   const cnHeader = cn(className, 'Box-row--gray d-flex flex-justify-between flex-items-center px-3 py-2');
 
   return (
-    <div className={cnHeader}>
-      <Status data={data} title={title} status={status} />
-      <Controls data={data} isOpenedFeature={isOpenedFeature} onToggle={props.onToggle} />
+    <div
+      className={cnHeader}
+      onClick={handleClickAtHeader}
+    >
+      <Status
+        data={data}
+        title={title}
+        status={status}
+        onClickAtTitle={handleClickAtHeader}
+      />
+      <Controls
+        data={data}
+        isOpenedFeature={isOpenedFeature}
+        onToggle={props.onToggle}
+      />
     </div>
   );
 };

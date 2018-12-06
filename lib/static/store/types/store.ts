@@ -1,9 +1,12 @@
-import { TestFeaturesStore } from '../modules/testFeatures/types';
+import { TestsStore } from '../modules/tests/types';
+import { AppStore } from '../modules/app/types';
 
 export enum StoreKey {
-  testFeatures = 'testFeatures',
+  tests = 'tests',
+  app = 'app',
 }
 
 export type RootStore = {
-  [StoreKey.testFeatures]?: TestFeaturesStore;
+  [StoreKey.tests]?: TestsStore;
+  [StoreKey.app]?: AppStore;
 };

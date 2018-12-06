@@ -5,4 +5,6 @@ export interface TextProps {
   as?: 'p' | 'span' | 'strong';
   textType?: 'normal' | 'italic' | 'bold';
   textColor?: ColorType;
+
+  onClick?: (e) => any;
 }
