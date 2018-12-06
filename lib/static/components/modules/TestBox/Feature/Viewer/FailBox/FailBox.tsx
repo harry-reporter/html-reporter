@@ -8,7 +8,7 @@ import './types';
 import './FailBox.css';
 import { IImagesInfo } from '../types';
 
-export default class FailBox extends React.Component<IImagesInfo, IFailBoxState> {
+export default class FailBox extends React.PureComponent<IImagesInfo, IFailBoxState> {
   public state = {
     tabId: 0,
     valueSwipe: 0.5,
