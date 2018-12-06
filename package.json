@@ -100,7 +100,6 @@
     "mocha": "^3.0.2",
     "node-sass": "^4.10.0",
     "prettier": "^1.15.3",
-    "prop-types": "^15.6.2",
     "proxyquire": "^1.7.11",
     "qemitter": "^1.0.0",
     "raf": "^3.4.0",
