@@ -1,4 +1,4 @@
-import { filter, flatMap, set, cloneDeep } from 'lodash';
+import { filter, flatMap, set, cloneDeep, compact } from 'lodash';
 import * as actionNames from './constants';
 import { isSuiteFailed, isAcceptable } from '../../utils/utils';
 
@@ -41,6 +41,24 @@ export const runFailedTests = (fails, actionName = actionNames.RUN_FAILED) => {
   return runTests({ tests: fails, action: { type: actionName } });
 };
 
+export const acceptAll = (fails) => {
+  fails = filterAcceptableBrowsers([].concat(fails));
+
+  const formattedFails = flatMap([].concat(fails), formatTests);
+
+  return async (dispatch) => {
+    try {
+      const updatedData = await fetch(
+        '/update-reference',
+        { method: 'POST', body: JSON.stringify(compact(formattedFails)) },
+      );
+      dispatch({ type: actionNames.ACCEPT_ALL_REFS, payload: updatedData });
+    } catch (e) {
+      // handle error
+    }
+  };
+};
+
 const filterBrowsers = (suites = [], filterFn) => {
   const modifySuite = (suite) => {
     if (suite.children) {
@@ -59,6 +77,42 @@ const filterBrowsers = (suites = [], filterFn) => {
   };
 
   return flatMap(cloneDeep(suites), modifySuite);
+};
+
+const formatTests = (test) => {
+  if (test.children) {
+    return flatMap(test.children, formatTests);
+  }
+
+  if (test.browserId) {
+    test.browsers = filter(test.browsers, { name: test.browserId });
+  }
+
+  const { suitePath, name, acceptTestAttempt } = test;
+  const prepareImages = (images, filterCond) => {
+    return filter(images, filterCond)
+      .filter(isAcceptable)
+      .map(({ actualPath, stateName }) => ({ status: 'updated', actualPath, stateName }));
+  };
+
+  return flatMap(test.browsers, (browser) => {
+    const browserResult = getBrowserResultByAttempt(browser, acceptTestAttempt);
+
+    const imagesInfo = test.stateName
+      ? prepareImages(browserResult.imagesInfo, { stateName: test.stateName })
+      : prepareImages(browserResult.imagesInfo, 'actualPath');
+
+    const { metaInfo, attempt } = browserResult;
+
+    return imagesInfo.length && {
+      suite: { path: suitePath.slice(0, -1) },
+      state: { name },
+      browserId: browser.name,
+      metaInfo,
+      imagesInfo,
+      attempt,
+    };
+  });
 };
 
 const filterFailedBrowsers = (suites = []) => {
