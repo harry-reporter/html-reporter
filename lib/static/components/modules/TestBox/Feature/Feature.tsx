@@ -9,6 +9,7 @@ import { FeatureProps, FeatureState } from './types';
 class Feature extends React.Component<FeatureProps, FeatureState> {
   public state = {
     isOpen: true,
+    viewType: 'screenshot',
   };
 
   public componentDidMount(): void {
@@ -23,12 +24,15 @@ class Feature extends React.Component<FeatureProps, FeatureState> {
     this.setState((prevState) => ({ isOpen: !prevState.isOpen }));
   }
 
+  public handleViewChange = (e) => {
+    this.setState({ viewType: e });
+  }
+
   public render(): JSX.Element {
     const { data } = this.props;
     const { isOpen } = this.state;
     const { name, result } = data;
     const typeViewer = data.result.imagesInfo.length > 0 ? 'screenshot' : 'tests';
-
     return (
       <div className={'Box-row p-0'}>
         <Header
@@ -37,8 +41,10 @@ class Feature extends React.Component<FeatureProps, FeatureState> {
           isOpenedFeature={isOpen}
           status={result.status}
           onToggle={this.toggleFeature}
+          handleViewChange={this.handleViewChange}
+          viewType={this.state.viewType}
         />
-        {isOpen && <Viewer type={typeViewer} {...data} />}
+        {isOpen && <Viewer type={this.state.viewType} {...data} />}
       </div>
     );
   }

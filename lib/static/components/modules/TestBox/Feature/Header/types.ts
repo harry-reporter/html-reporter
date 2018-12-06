@@ -6,6 +6,8 @@ export interface HeaderProps {
   title: string;
   className?: string;
   isOpenedFeature: boolean;
+  handleViewChange: (e: any) => void;
+  viewType: string;
 
   onToggle: () => any;
 }

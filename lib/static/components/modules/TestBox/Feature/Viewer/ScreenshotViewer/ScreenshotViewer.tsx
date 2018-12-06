@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { IViewerProps, IImagesInfo } from '../types';
+import { IImagesInfo, IResultViewerProps } from '../types';
 import SuccessBox from '../SuccessBox/SuccessBox';
 import FailBox from '../FailBox/FailBox';
 import Link from 'src/components/ui/Link/Link';
@@ -10,17 +10,21 @@ interface IScreenshotViewerState {
   isOpen: boolean;
 }
 
-export default class ScreenshotViewer extends React.Component<IViewerProps, IScreenshotViewerState> {
-  constructor(props: IViewerProps) {
+export default class ScreenshotViewer extends React.Component<IResultViewerProps, IScreenshotViewerState> {
+  constructor(props: IResultViewerProps) {
     super(props);
-    this.state = { isOpen: this.props.result.status !== 'success' };
+    this.state = { isOpen: this.props.status !== 'success' };
   }
 
   public getColor() {
-    const status = this.props.result.status;
+    const status = this.props.status;
     let color = 'gray';
-    if (status === 'success') { color = 'green'; }
-    if (status === 'fail') { color = 'red'; }
+    if (status === 'success') {
+      color = 'green';
+    }
+    if (status === 'fail') {
+      color = 'red';
+    }
     return color;
   }
   public getViewBox(item: IImagesInfo) {
@@ -57,7 +61,7 @@ export default class ScreenshotViewer extends React.Component<IViewerProps, IScr
   }
 
   public renderViewBox = () => {
-    return this.props.result.imagesInfo.map((item: IImagesInfo, id: number) => {
+    return this.props.imagesInfo.map((item: IImagesInfo, id: number) => {
       return <React.Fragment key={id}>{this.getViewBox(item)}</React.Fragment>;
     });
   }

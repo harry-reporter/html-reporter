@@ -5,4 +5,5 @@ export interface FeatureProps {
 }
 export interface FeatureState {
   isOpen: boolean;
+  viewType: string;
 }
