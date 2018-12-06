@@ -8,7 +8,7 @@ import ImageDiffOnionSkin from './ImageDiffOnionSkin/ImageDiffOnionSkin';
 
 interface IFailBoxState {
   tabId: number;
-  value: number;
+  valueOnionSkin: number;
   valueLoupe: number;
   valueSwipe: number;
 }
@@ -17,7 +17,7 @@ export default class FailBox extends React.Component<IImagesInfo, IFailBoxState>
   public state = {
     tabId: 0,
     valueSwipe: 0.5,
-    value: 0.5,
+    valueOnionSkin: 0.5,
     valueLoupe: 2,
   };
   public textModItem = ['2-up', 'Only Diff', 'Loupe', 'Swipe', 'Onion Skin'];
@@ -41,7 +41,7 @@ export default class FailBox extends React.Component<IImagesInfo, IFailBoxState>
         <ImageDiffSwipe
           before={this.props.expectedPath}
           after={this.props.actualPath}
-          value={this.state.value}
+          value={this.state.valueSwipe}
           className='BoxContentSwipe-ImageDiff'
         />
         <input
@@ -58,7 +58,10 @@ export default class FailBox extends React.Component<IImagesInfo, IFailBoxState>
   }
 
   public handleInputChange = (e) => {
-    return this.setState({ value: parseFloat(e.target.value) });
+    return this.setState({ valueSwipe: parseFloat(e.target.value) });
+  }
+  public handleInputChangeOnion = (e) => {
+    return this.setState({ valueOnionSkin: parseFloat(e.target.value) });
   }
 
   public getBoxItem(cn: string, color: string, imgPath: string): JSX.Element {
@@ -131,17 +134,16 @@ export default class FailBox extends React.Component<IImagesInfo, IFailBoxState>
         <ImageDiffOnionSkin
           before={this.props.expectedPath}
           after={this.props.actualPath}
-          value={this.state.value}
+          value={this.state.valueOnionSkin}
           className='BoxContentOnionSkin-ImageDiff'
-          width={100}
         />
         <input
           type='range'
           min={0}
           max={1}
           step={0.01}
-          defaultValue={`${this.state.value}`}
-          onChange={this.handleInputChange}
+          defaultValue={`${this.state.valueOnionSkin}`}
+          onChange={this.handleInputChangeOnion}
           className='BoxContentOnionSkin-range mt-2'
         />
       </div>
