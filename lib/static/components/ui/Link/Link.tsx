@@ -1,5 +1,5 @@
 import * as React from 'react';
-import classnames = require('classnames');
+import classnames from 'classnames';
 
 interface ILinkProps {
   className?: string;

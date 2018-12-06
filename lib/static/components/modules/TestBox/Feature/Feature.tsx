@@ -4,7 +4,6 @@ import Viewer from './Viewer';
 import Header from './Header';
 
 import { FeatureProps, FeatureState } from './types';
-import ScreenshotViewer from './Viewer/ScreenshotViewer';
 
 // TODO: вынести функциионал по аккордеону в отдельную компоненту
 class Feature extends React.Component<FeatureProps, FeatureState> {
@@ -28,6 +27,7 @@ class Feature extends React.Component<FeatureProps, FeatureState> {
     const { data } = this.props;
     const { isOpen } = this.state;
     const { name, result } = data;
+    const typeViewer = data.result.imagesInfo.length > 0 ? 'screenshot' : 'tests';
 
     return (
       <div className={'Box-row p-0'}>
@@ -38,7 +38,7 @@ class Feature extends React.Component<FeatureProps, FeatureState> {
           status={result.status}
           onToggle={this.toggleFeature}
         />
-        {isOpen && <Viewer type={data.result.imagesInfo.length > 0 ? 'screenshot' : 'tests'} {...data} />}
+        {isOpen && <Viewer type={typeViewer} {...data} />}
       </div>
     );
   }
