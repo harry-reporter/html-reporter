@@ -4,15 +4,23 @@ import cn from 'classnames';
 import Header from './Header';
 import Feature from './Feature';
 
-import { TestBoxProps, TestBoxState } from 'src/components/modules/TestBox/types';
+import { Measurer, TestBoxProps, TestBoxState } from 'src/components/modules/TestBox/types';
+
+export const MeasurerContext = React.createContext<Measurer>({});
 
 class TestBox extends React.PureComponent<TestBoxProps, TestBoxState> {
+  public measurer: Measurer;
   public state = {
     isOpen: true,
   };
 
+  constructor(props) {
+    super(props);
+    this.measurer = { measure: props.measure };
+  }
+
   public toggleBox = () => {
-    this.setState((prevState) => ({ isOpen: !prevState.isOpen }), this.props.onToggle);
+    this.setState((prevState) => ({ isOpen: !prevState.isOpen }), this.props.measure);
   }
 
   public getSuite = (suitePath) => suitePath.join(' / ');
@@ -20,7 +28,7 @@ class TestBox extends React.PureComponent<TestBoxProps, TestBoxState> {
   public renderFeatures = (): any => {
     const { data } = this.props;
 
-    return data.browsers.map((item, id) => <Feature onToggle={this.props.onToggle} key={id} data={item} />);
+    return data.browsers.map((item, id) => <Feature key={id} data={item} />);
   }
 
   public render(): JSX.Element {
@@ -31,17 +39,19 @@ class TestBox extends React.PureComponent<TestBoxProps, TestBoxState> {
     const cnTestBox = cn('Box mb-3', className);
 
     return (
-      <div style={style}>
-        <div className={cnTestBox}>
-          <Header
-            title={suite}
-            status={data.status}
-            isOpenedBox={isOpen}
-            onToggle={this.toggleBox}
-          />
-          {isOpen && this.renderFeatures()}
+      <MeasurerContext.Provider value={this.measurer}>
+        <div style={style}>
+          <div className={cnTestBox}>
+            <Header
+              title={suite}
+              status={data.status}
+              isOpenedBox={isOpen}
+              onToggle={this.toggleBox}
+            />
+            {isOpen && this.renderFeatures()}
+          </div>
         </div>
-      </div>
+      </MeasurerContext.Provider>
     );
   }
 }

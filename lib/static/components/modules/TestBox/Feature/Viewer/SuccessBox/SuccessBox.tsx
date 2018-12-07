@@ -9,7 +9,12 @@ export default class SuccessBox extends React.Component<IImagesInfo> {
         <div className={`Box-row Box-row--darkgray d-flex flex-justify-center`}>
           <div className={`Expected`}>
             <p className={`Title text-green text-bold`}>Expected</p>
-            <img onLoad={this.props.onLoad} src={this.props.expectedPath} alt='Expected Test' className='BoxViewAsserts-Img border border-green' />
+            <img
+              onLoad={this.props.onLoad}
+              src={this.props.expectedPath}
+              alt='Expected Test'
+              className='BoxViewAsserts-Img border border-green'
+            />
           </div>
         </div>
       </>

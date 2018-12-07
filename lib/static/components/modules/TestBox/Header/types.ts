@@ -4,6 +4,7 @@ export interface HeaderProps {
   title: string;
   status: TestStatus;
   isOpenedBox: boolean;
+
   onToggle: () => any;
 }
 

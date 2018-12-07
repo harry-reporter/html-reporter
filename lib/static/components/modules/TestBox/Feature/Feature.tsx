@@ -4,6 +4,7 @@ import Viewer from './Viewer';
 import Header from './Header';
 
 import { FeatureProps, FeatureState } from './types';
+import { withMeasurer } from 'src/components/modules/TestBox/withMeasurer';
 
 // TODO: вынести функциионал по аккордеону в отдельную компоненту
 class Feature extends React.PureComponent<FeatureProps, FeatureState> {
@@ -16,11 +17,11 @@ class Feature extends React.PureComponent<FeatureProps, FeatureState> {
 
     this.setState({
       isOpen: data.result.status === 'fail',
-    }, this.props.onToggle);
+    }, this.props.measure);
   }
 
   public toggleFeature = () => {
-    this.setState((prevState) => ({ isOpen: !prevState.isOpen }), this.props.onToggle);
+    this.setState((prevState) => ({ isOpen: !prevState.isOpen }), this.props.measure);
   }
 
   public render(): JSX.Element {
@@ -37,10 +38,10 @@ class Feature extends React.PureComponent<FeatureProps, FeatureState> {
           status={result.status}
           onToggle={this.toggleFeature}
         />
-        {isOpen && <Viewer onToggle={this.props.onToggle} type={data.result.imagesInfo.length > 0 ? 'screenshot' : 'tests'} {...data} />}
+        {isOpen && <Viewer type={data.result.imagesInfo.length > 0 ? 'screenshot' : 'tests'} {...data} />}
       </div>
     );
   }
 }
 
-export default Feature;
+export default withMeasurer(Feature);

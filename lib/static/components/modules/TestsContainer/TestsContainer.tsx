@@ -11,7 +11,7 @@ import { TestsContainerProps, TestsContainerState } from './types';
 
 const cache = new CellMeasurerCache({
   fixedWidth: true,
-  defaultHeight: 150,
+  defaultHeight: 160,
 });
 
 class TestsContainer extends React.PureComponent<TestsContainerProps, TestsContainerState> {
@@ -20,7 +20,7 @@ class TestsContainer extends React.PureComponent<TestsContainerProps, TestsConta
       style={props.style}
       key={props.key}
       data={this.props.tests[props.index]}
-      onToggle={measure}
+      measure={measure}
     />
   )
 

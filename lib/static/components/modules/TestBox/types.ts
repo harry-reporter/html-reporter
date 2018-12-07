@@ -5,8 +5,12 @@ export interface TestBoxProps {
   style?: React.CSSProperties;
   className?: string;
 
-  onToggle?: any;
+  measure?: () => any;
 }
 export interface TestBoxState {
   isOpen: boolean;
+}
+
+export interface Measurer {
+  measure?: () => any;
 }

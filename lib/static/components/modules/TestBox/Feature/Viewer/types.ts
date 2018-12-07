@@ -4,7 +4,7 @@ export interface IViewerProps {
   retries: IResultViewerProps[];
   type: 'code' | 'tests' | 'screenshot';
   className?: string;
-  onToggle?: any;
+  measure: () => any;
 }
 
 export interface IResultViewerProps {

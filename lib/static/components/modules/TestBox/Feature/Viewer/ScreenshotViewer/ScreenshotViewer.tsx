@@ -5,12 +5,13 @@ import SuccessBox from '../SuccessBox/SuccessBox';
 import FailBox from '../FailBox/FailBox';
 import Link from 'src/components/ui/Link/Link';
 import ErrorBox from '../ErrorBox/ErrorBox';
+import { withMeasurer } from 'src/components/modules/TestBox/withMeasurer';
 
 interface IScreenshotViewerState {
   isOpen: boolean;
 }
 
-export default class ScreenshotViewer extends React.PureComponent<IViewerProps, IScreenshotViewerState> {
+class ScreenshotViewer extends React.PureComponent<IViewerProps, IScreenshotViewerState> {
   constructor(props: IViewerProps) {
     super(props);
     this.state = { isOpen: this.props.result.status !== 'success' };
@@ -23,13 +24,13 @@ export default class ScreenshotViewer extends React.PureComponent<IViewerProps, 
   public getViewBox(item: IImagesInfo) {
     let viewBoxWrap: any = null;
     if (item.status === 'success') {
-      viewBoxWrap = this.getSuccessBoxTemplate(item, <SuccessBox onLoad={this.props.onToggle} {...item} />);
+      viewBoxWrap = this.getSuccessBoxTemplate(item, <SuccessBox onLoad={this.props.measure} {...item} />);
     }
     if (item.status === 'fail') {
-      viewBoxWrap = this.getSuccessBoxTemplate(item, <FailBox onLoad={this.props.onToggle} {...item} />);
+      viewBoxWrap = this.getSuccessBoxTemplate(item, <FailBox onLoad={this.props.measure} {...item} />);
     }
     if (item.status === 'error') {
-      viewBoxWrap = <ErrorBox onLoad={this.props.onToggle} {...item} />;
+      viewBoxWrap = <ErrorBox onLoad={this.props.measure} {...item} />;
     }
 
     return viewBoxWrap;
@@ -60,6 +61,8 @@ export default class ScreenshotViewer extends React.PureComponent<IViewerProps, 
   }
   public onLinkClick = (e) => {
     e.preventDefault();
-    this.setState(({ isOpen }) => ({ isOpen: !isOpen }), this.props.onToggle);
+    this.setState(({ isOpen }) => ({ isOpen: !isOpen }), this.props.measure);
   }
 }
+
+export default withMeasurer<IViewerProps>(ScreenshotViewer);
