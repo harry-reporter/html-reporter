@@ -1,8 +1,8 @@
-import { Browser, TestStatus } from 'src/store/modules/tests/types';
-import { IResultViewerProps } from '../Viewer/types';
+import { TestStatus } from 'src/store/modules/tests/types';
+import { ResultViewerProps } from '../Viewer/types';
 
 export interface IHeaderProps {
-  data: IResultViewerProps;
+  data: ResultViewerProps;
   status: TestStatus;
   title: string;
   className?: string;

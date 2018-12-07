@@ -1,9 +1,10 @@
 import * as React from 'react';
 
-import { ICodeViewerProps } from './types';
+import { CodeViewerProps } from './types';
 
-export default class CodeViewer extends React.PureComponent<ICodeViewerProps> {
+export default class CodeViewer extends React.PureComponent<CodeViewerProps> {
   public render() {
+    const { platform, url, file, sessionId, textFile } = this.props.metaInfo;
     return (
       <>
         <div className='Box-row Box-row--gray Box--condensed pt-2 pb-2'>
@@ -12,22 +13,22 @@ export default class CodeViewer extends React.PureComponent<ICodeViewerProps> {
           </p>
           <p className='m-0'>
             <strong>platform: </strong>
-            {this.props.metaInfo.platform}
+            {platform}
           </p>
           <p className='m-0'>
-            <strong>url: </strong> <a href={`${this.props.metaInfo.url}`}>{this.props.metaInfo.url}</a>
+            <strong>url: </strong> <a href={`${url}`}>{url}</a>
           </p>
           <p className='m-0'>
             <strong>file: </strong>
-            {this.props.metaInfo.file}
+            {file}
           </p>
           <p className='m-0'>
             <strong>sessionId: </strong>
-            {this.props.metaInfo.sessionId}
+            {sessionId}
           </p>
         </div>
         <div className='Box-row'>
-          <pre className='pl-3'>it('Hello, Harry!'){this.props.metaInfo.textFile}</pre>
+          <pre className='pl-3'>it('Hello, Harry!'){textFile}</pre>
         </div>
       </>
     );

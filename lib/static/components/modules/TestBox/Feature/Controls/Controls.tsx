@@ -13,18 +13,23 @@ import ButtonEye from 'src/components/ui/ButtonEye/ButtonEye';
 export default class Controls extends React.PureComponent<ControlsProps> {
   public getChevron = (isOpenedFeature) => (isOpenedFeature ? ChevronUp : ChevronDown);
 
+  public handleViewClick() {
+    const path = './';
+    window.open(path, '_blank');
+  }
   // TODO: объявить объекты, которые передаются в качестве пропс
   public render() {
+    const { isOpenedFeature, onToggle, viewType, handleViewChange, data } = this.props;
     return (
       <ControlsStyled>
-        <ControlViewers selectedId={2} handleViewChange={this.props.handleViewChange} viewType={this.props.viewType} />
+        <ControlViewers selectedId={2} handleViewChange={handleViewChange} viewType={viewType} />
         <ButtonsGroup className={'mr-3'} btns={[{ title: 'Skip', size: 'sm' }, { title: 'Accept', size: 'sm' }]} />
-        <Button size={'sm'} className={'mr-3'} title={'View'} />
-        <ButtonIconContainerStyled className={'mr-3'} role={'button'} onClick={this.props.onToggle}>
-          <ButtonEye url={this.props.data.metaInfo.url} />
+        <Button size={'sm'} className={'mr-3'} title={'View'} onClick={this.handleViewClick} />
+        <ButtonIconContainerStyled className={'mr-3'} role={'button'}>
+          <ButtonEye url={data.metaInfo.url} />
         </ButtonIconContainerStyled>
-        <ButtonIconContainerStyled role={'button'} onClick={this.props.onToggle}>
-          <Octicon icon={this.getChevron(this.props.isOpenedFeature)} />
+        <ButtonIconContainerStyled role={'button'} onClick={onToggle}>
+          <Octicon icon={this.getChevron(isOpenedFeature)} />
         </ButtonIconContainerStyled>
       </ControlsStyled>
     );

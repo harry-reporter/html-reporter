@@ -1,9 +1,8 @@
-import { Browser } from 'src/store/modules/tests/types';
-import { IResultViewerProps } from '../Viewer/types';
+import { ResultViewerProps } from '../Viewer/types';
 
 export interface ControlsProps {
   isOpenedFeature: boolean;
-  data: IResultViewerProps;
+  data: ResultViewerProps;
   handleViewChange: (e: any) => void;
   onToggle: () => any;
   viewType: string;

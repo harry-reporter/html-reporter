@@ -1,23 +1,14 @@
 import * as React from 'react';
+
 import ButtonsGroup from 'src/components/ui/ButtonGroup/ButtonGroup';
 import { Code, File, ListUnordered } from '@githubprimer/octicons-react';
 import { ButtonProps } from 'src/components/ui/Button/types';
-
-interface ControlViewersProps {
-  selectedId: number;
-  handleViewChange: (e: any) => void;
-  viewType: string;
-}
-interface ControlViewersState {
-  selectedId: number;
-}
+import { ControlViewersProps, ControlViewersState } from './types';
 
 export default class ControlViewers extends React.PureComponent<ControlViewersProps, ControlViewersState> {
   public state = {
     selectedId: -1,
   };
-
-  // public handleClickAtButton = (id: number) => () => this.setState({ selectedId: id });
 
   public handleClickAtButton = (viewType: string) => () => {
     this.props.handleViewChange(viewType);
@@ -25,27 +16,28 @@ export default class ControlViewers extends React.PureComponent<ControlViewersPr
 
   public render(): JSX.Element {
     const { selectedId } = this.state;
+    const { viewType } = this.props;
 
     const buttonOptions: ButtonProps[] = [
       {
         title: '',
         size: 'sm',
         icon: Code,
-        isSelected: this.props.viewType === 'code',
+        isSelected: viewType === 'code',
         onClick: this.handleClickAtButton('code'),
       },
       {
         title: '',
         size: 'sm',
         icon: ListUnordered,
-        isSelected: this.props.viewType === 'tests',
+        isSelected: viewType === 'tests',
         onClick: this.handleClickAtButton('tests'),
       },
       {
         title: '',
         size: 'sm',
         icon: File,
-        isSelected: this.props.viewType === 'screenshot',
+        isSelected: viewType === 'screenshot',
         onClick: this.handleClickAtButton('screenshot'),
       },
     ];

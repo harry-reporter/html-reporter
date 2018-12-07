@@ -3,7 +3,6 @@ import cn from 'classnames';
 
 import Controls from '../Controls';
 import Status from '../Status';
-import { withPadding } from 'src/components/hoc/withPadding';
 
 import { IHeaderProps } from './types';
 
@@ -17,26 +16,37 @@ export default class Header extends React.PureComponent<IHeaderProps> {
   public cnHeader = cn(this.props.className, 'Box-row--gray d-flex flex-justify-between flex-items-center px-3 py-2');
 
   public render() {
-    const statusProps = {
-      data: this.props.data,
-      title: this.props.title,
-      status: this.props.status,
-      onClickAtTitle: this.handleClickAtHeader,
-      handleDataChange: this.props.handleDataChange,
-      pageCurrent: this.props.pageCurrent,
-      pageCount: this.props.pageCount,
-    };
-    const controlsProps = {
-      data: this.props.data,
-      isOpenedFeature: this.props.isOpenedFeature,
-      onToggle: this.props.onToggle,
-      handleViewChange: this.props.handleViewChange,
-      viewType: this.props.viewType,
-    };
+    const {
+      data,
+      title,
+      status,
+      handleDataChange,
+      pageCurrent,
+      pageCount,
+      isOpenedFeature,
+      onToggle,
+      handleViewChange,
+      viewType,
+    } = this.props;
+
     return (
       <div className={this.cnHeader} onClick={this.handleClickAtHeader}>
-        <Status {...statusProps} />
-        <Controls {...controlsProps} />
+        <Status
+          data={data}
+          title={title}
+          status={status}
+          onClickAtTitle={this.handleClickAtHeader}
+          handleDataChange={handleDataChange}
+          pageCurrent={pageCurrent}
+          pageCount={pageCount}
+        />
+        <Controls
+          data={data}
+          isOpenedFeature={isOpenedFeature}
+          onToggle={onToggle}
+          handleViewChange={handleViewChange}
+          viewType={viewType}
+        />
       </div>
     );
   }

@@ -4,13 +4,15 @@ import CodeViewer from './CodeViewer';
 import ScreenshotViewer from './ScreenshotViewer';
 import ScriptViewer from './ScriptViewer';
 
-import { IViewerProps, IResultViewerProps } from './types';
+import { ResultViewerProps } from './types';
 
-export default class Viewer extends React.PureComponent<IResultViewerProps> {
+export default class Viewer extends React.PureComponent<ResultViewerProps> {
   public render() {
     let ViewerWrapper: any = null;
+    const { type, imagesInfo } = this.props;
+    const defaultViewer = imagesInfo.length > 0 ? ScreenshotViewer : ScriptViewer;
 
-    switch (this.props.type) {
+    switch (type) {
       case 'code':
         ViewerWrapper = CodeViewer;
         break;
@@ -18,7 +20,7 @@ export default class Viewer extends React.PureComponent<IResultViewerProps> {
         ViewerWrapper = ScriptViewer;
         break;
       default:
-        ViewerWrapper = this.props.imagesInfo.length > 0 ? ScreenshotViewer : ScriptViewer;
+        ViewerWrapper = defaultViewer;
     }
 
     return <ViewerWrapper {...this.props} />;

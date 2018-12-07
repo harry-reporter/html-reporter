@@ -1,17 +1,17 @@
 import * as React from 'react';
 
-import { IImagesInfo, IResultViewerProps } from '../types';
+import { ImagesInfo, ResultViewerProps } from '../types';
 import SuccessBox from '../SuccessBox/SuccessBox';
 import FailBox from '../FailBox/FailBox';
 import Link from 'src/components/ui/Link/Link';
 import ErrorBox from '../ErrorBox/ErrorBox';
 
-interface IScreenshotViewerState {
+interface ScreenshotViewerState {
   isOpen: boolean;
 }
 
-export default class ScreenshotViewer extends React.PureComponent<IResultViewerProps, IScreenshotViewerState> {
-  constructor(props: IResultViewerProps) {
+export default class ScreenshotViewer extends React.PureComponent<ResultViewerProps, ScreenshotViewerState> {
+  constructor(props: ResultViewerProps) {
     super(props);
     this.state = { isOpen: this.props.status !== 'success' };
   }
@@ -27,7 +27,7 @@ export default class ScreenshotViewer extends React.PureComponent<IResultViewerP
     }
     return color;
   }
-  public getViewBox(item: IImagesInfo) {
+  public getViewBox(item: ImagesInfo) {
     let viewBoxWrap: any = null;
     switch (item.status) {
       case 'success':
@@ -46,7 +46,7 @@ export default class ScreenshotViewer extends React.PureComponent<IResultViewerP
     return viewBoxWrap;
   }
 
-  public getSuccessBoxTemplate(item: IImagesInfo, viewBoxWrap: JSX.Element) {
+  public getSuccessBoxTemplate(item: ImagesInfo, viewBoxWrap: JSX.Element) {
     return (
       <>
         <div className={'Box Box-row Box--condensed Box-header d-flex flex-justify-between'}>
@@ -61,7 +61,7 @@ export default class ScreenshotViewer extends React.PureComponent<IResultViewerP
   }
 
   public renderViewBox = () => {
-    return this.props.imagesInfo.map((item: IImagesInfo, id: number) => {
+    return this.props.imagesInfo.map((item: ImagesInfo, id: number) => {
       return <React.Fragment key={id}>{this.getViewBox(item)}</React.Fragment>;
     });
   }

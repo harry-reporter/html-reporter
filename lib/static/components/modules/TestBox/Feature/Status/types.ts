@@ -1,11 +1,11 @@
-import { Browser, TestStatus } from 'src/store/modules/tests/types';
-import { IResultViewerProps } from '../Viewer/types';
+import { TestStatus } from 'src/store/modules/tests/types';
+import { ResultViewerProps } from '../Viewer/types';
 
-export interface IStatusProps {
+export interface StatusProps {
   title: string;
   status: TestStatus;
   className?: string;
-  data: IResultViewerProps;
+  data: ResultViewerProps;
   pageCount: number;
   pageCurrent: number;
   handleDataChange: (e) => void;

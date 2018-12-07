@@ -1,4 +1,4 @@
-export interface ICodeViewerProps {
+export interface CodeViewerProps {
   metaInfo: {
     file: string;
     sessionId: string;

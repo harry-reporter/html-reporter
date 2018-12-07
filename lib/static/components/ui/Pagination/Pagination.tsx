@@ -57,7 +57,6 @@ class Pagination extends React.PureComponent<IPaginationProps, PaginationState> 
    *
    */
   public renderSubNavByMaxPage = (): React.ReactNode => {
-    const { maxPage } = this.props;
     const { currentPage } = this.state;
 
     const subNavList: React.ReactNode[] = [];
