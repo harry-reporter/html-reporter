@@ -28,6 +28,7 @@ class Feature extends React.PureComponent<FeatureProps, FeatureState> {
     const { data } = this.props;
     const { isOpen } = this.state;
     const { name, result } = data;
+    const typeViewer = data.result.imagesInfo.length > 0 ? 'screenshot' : 'tests';
 
     return (
       <div className={'Box-row p-0'}>
@@ -38,7 +39,7 @@ class Feature extends React.PureComponent<FeatureProps, FeatureState> {
           status={result.status}
           onToggle={this.toggleFeature}
         />
-        {isOpen && <Viewer type={data.result.imagesInfo.length > 0 ? 'screenshot' : 'tests'} {...data} />}
+        {isOpen && <Viewer type={typeViewer} {...data} />}
       </div>
     );
   }

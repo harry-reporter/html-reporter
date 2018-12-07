@@ -1,5 +1,5 @@
 import * as React from 'react';
-
+import './SuccessBox.css';
 import { IImagesInfo } from '../types';
 
 export default class SuccessBox extends React.Component<IImagesInfo> {

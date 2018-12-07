@@ -19,18 +19,26 @@ class ScreenshotViewer extends React.PureComponent<IViewerProps, IScreenshotView
 
   public getColor() {
     const status = this.props.result.status;
-    return status === 'success' ? 'green' : status === 'fail' ? 'red' : 'gray';
+    let color = 'gray';
+    if (status === 'success') { color = 'green'; }
+    if (status === 'fail') { color = 'red'; }
+    return color;
   }
   public getViewBox(item: IImagesInfo) {
     let viewBoxWrap: any = null;
-    if (item.status === 'success') {
-      viewBoxWrap = this.getSuccessBoxTemplate(item, <SuccessBox onLoad={this.props.measure} {...item} />);
-    }
-    if (item.status === 'fail') {
-      viewBoxWrap = this.getSuccessBoxTemplate(item, <FailBox onLoad={this.props.measure} {...item} />);
-    }
-    if (item.status === 'error') {
-      viewBoxWrap = <ErrorBox onLoad={this.props.measure} {...item} />;
+
+    switch (item.status) {
+      case 'success':
+        viewBoxWrap = this.getSuccessBoxTemplate(item, <SuccessBox onLoad={this.props.measure} {...item} />);
+        break;
+      case 'fail':
+        viewBoxWrap = this.getSuccessBoxTemplate(item, <FailBox onLoad={this.props.measure} {...item} />);
+        break;
+      case 'error':
+        viewBoxWrap = <ErrorBox  onLoad={this.props.measure} {...item} />;
+        break;
+      default:
+        viewBoxWrap = this.getSuccessBoxTemplate(item, <SuccessBox  onLoad={this.props.measure} {...item} />);
     }
 
     return viewBoxWrap;
