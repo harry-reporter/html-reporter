@@ -11,6 +11,7 @@ import { ColorType } from 'src/components/ui/types';
 
 export default class Status extends React.PureComponent<StatusProps> {
   public cnStatus = cn(this.props.className, 'd-flex flex-justify-between flex-items-center');
+  public status = this.props.status;
 
   public isFail = status === 'fail' || status === 'error';
   public statusColor: ColorType = this.isFail ? 'red' : 'green';

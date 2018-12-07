@@ -8,7 +8,7 @@ export interface StatusProps {
   data: ResultViewerProps;
   pageCount: number;
   pageCurrent: number;
-  handleDataChange: (e) => void;
+  handleDataChange: (e: number) => void;
 
   onClickAtTitle: (e) => any;
 }

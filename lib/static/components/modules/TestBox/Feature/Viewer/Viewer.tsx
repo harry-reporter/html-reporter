@@ -10,7 +10,6 @@ export default class Viewer extends React.PureComponent<ResultViewerProps> {
   public render() {
     let ViewerWrapper: any = null;
     const { type, imagesInfo } = this.props;
-    const defaultViewer = imagesInfo.length > 0 ? ScreenshotViewer : ScriptViewer;
 
     switch (type) {
       case 'code':
@@ -19,8 +18,9 @@ export default class Viewer extends React.PureComponent<ResultViewerProps> {
       case 'tests':
         ViewerWrapper = ScriptViewer;
         break;
-      default:
-        ViewerWrapper = defaultViewer;
+      case 'screenshot':
+        ViewerWrapper = ScreenshotViewer;
+        break;
     }
 
     return <ViewerWrapper {...this.props} />;

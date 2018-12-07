@@ -11,7 +11,7 @@ export default class ControlViewers extends React.PureComponent<ControlViewersPr
   };
 
   public handleClickAtButton = (viewType: string) => () => {
-    this.props.handleViewChange(viewType);
+    this.props.onChange(viewType);
   }
 
   public render(): JSX.Element {

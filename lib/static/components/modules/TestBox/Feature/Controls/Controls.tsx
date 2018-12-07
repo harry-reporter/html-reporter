@@ -22,7 +22,7 @@ export default class Controls extends React.PureComponent<ControlsProps> {
     const { isOpenedFeature, onToggle, viewType, handleViewChange, data } = this.props;
     return (
       <ControlsStyled>
-        <ControlViewers selectedId={2} handleViewChange={handleViewChange} viewType={viewType} />
+        <ControlViewers selectedId={2} onChange={handleViewChange} viewType={viewType} />
         <ButtonsGroup className={'mr-3'} btns={[{ title: 'Skip', size: 'sm' }, { title: 'Accept', size: 'sm' }]} />
         <Button size={'sm'} className={'mr-3'} title={'View'} onClick={this.handleViewClick} />
         <ButtonIconContainerStyled className={'mr-3'} role={'button'}>

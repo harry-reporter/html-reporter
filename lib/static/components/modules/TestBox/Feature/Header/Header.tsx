@@ -4,9 +4,9 @@ import cn from 'classnames';
 import Controls from '../Controls';
 import Status from '../Status';
 
-import { IHeaderProps } from './types';
+import { HeaderProps } from './types';
 
-export default class Header extends React.PureComponent<IHeaderProps> {
+export default class Header extends React.PureComponent<HeaderProps> {
   public handleClickAtHeader = (e) => {
     if (e.target === e.currentTarget) {
       this.props.onToggle();
