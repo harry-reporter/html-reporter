@@ -1,6 +1,6 @@
 import * as React from 'react';
 import ButtonsGroup from 'src/components/ui/ButtonGroup/ButtonGroup';
-import { Code, File, ListOrdered } from '@githubprimer/octicons-react';
+import { Code, File, ListUnordered } from '@githubprimer/octicons-react';
 import { ButtonProps } from 'src/components/ui/Button/types';
 
 interface ControlViewersProps {
@@ -37,7 +37,7 @@ export default class ControlViewers extends React.PureComponent<ControlViewersPr
       {
         title: '',
         size: 'sm',
-        icon: ListOrdered,
+        icon: ListUnordered,
         isSelected: this.props.viewType === 'tests',
         onClick: this.handleClickAtButton('tests'),
       },

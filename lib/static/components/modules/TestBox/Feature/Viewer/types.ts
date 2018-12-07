@@ -16,6 +16,8 @@ export interface IResultViewerProps {
   status: 'success' | 'fail' | 'error';
   suiteUrl: string;
   reason?: IReasonProps;
+  type: 'code' | 'tests' | 'screenshot';
+  className?: string;
 }
 
 export interface IImagesInfo {

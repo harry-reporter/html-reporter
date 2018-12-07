@@ -6,34 +6,49 @@ import StatusIcon from 'src/components/modules/TestBox/Feature/Status/Icon';
 import Text from 'src/components/ui/Text/Text';
 import { BrowserNameStyled } from './styled';
 
-import { StatusProps } from './types';
+import { IStatusProps } from './types';
 import { ColorType } from 'src/components/ui/types';
+import { render } from 'react-dom';
+import { TextProps } from 'src/components/ui/Text/types';
 
-const Status: React.SFC<StatusProps> = (props) => {
-  const { title, status, data, className } = props;
+export default class Status extends React.PureComponent<IStatusProps> {
+  public cnStatus = cn(this.props.className, 'd-flex flex-justify-between flex-items-center');
 
-  const cnStatus = cn(className, 'd-flex flex-justify-between flex-items-center');
+  public isFail = status === 'fail' || status === 'error';
+  public statusColor: ColorType = this.isFail ? 'red' : 'green';
+  public maxPage = this.props.data.attempt + 1;
 
-  const isFail = (status === 'fail') || (status === 'error');
-  const statusColor: ColorType = isFail ? 'red' : 'green';
-  const maxPage = data.result.attempt + 1;
+  public render() {
+    const textProps: TextProps = {
+      as: 'span',
+      className: this.cnStatus,
+      textColor: this.statusColor,
+      textType: 'bold',
+    };
 
-  return (
-    <Text as={'span'} className={cnStatus} textColor={statusColor} textType={'bold'}>
-      <StatusIcon mr={2} isFail={isFail} />
-      <BrowserNameStyled
-        as={'span'}
-        textType={'bold'}
-        textColor={statusColor}
-        mr={6}
-        onClick={props.onClickAtTitle}
-      >
-        {title}
-      </BrowserNameStyled>
-      <Text as={'span'} textColor={'gray'} mr={2}><i>Attempts:</i> </Text>
-      <Pagination defaultCurrentPage={maxPage} hasPreventDefault={true} maxPage={maxPage} />
-    </Text>
-  );
-};
-
-export default Status;
+    const browserNamesStyledProps = {
+      as: 'span',
+      textType: 'bold',
+      textColor: this.statusColor,
+      mr: 6,
+      onClick: this.props.onClickAtTitle,
+    };
+    const paginationProps = {
+      defaultCurrentPage: this.maxPage,
+      hasPreventDefault: true,
+      pageCount: this.props.pageCount,
+      handleDataChange: this.props.handleDataChange,
+      pageCurrent: this.props.pageCurrent,
+    };
+    return (
+      <Text {...textProps}>
+        <StatusIcon mr={2} isFail={this.isFail} />
+        <BrowserNameStyled {...browserNamesStyledProps}>{this.props.title}</BrowserNameStyled>
+        <Text as={'span'} textColor={'gray'} mr={2}>
+          <i>Attempts:</i>{' '}
+        </Text>
+        <Pagination {...paginationProps} />
+      </Text>
+    );
+  }
+}
