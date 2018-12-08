@@ -3,41 +3,51 @@ import cn from 'classnames';
 
 import Controls from '../Controls';
 import Status from '../Status';
-import { withPadding } from 'src/components/hoc/withPadding';
 
 import { HeaderProps } from './types';
 
-interface HeaderState {}
-
-class Header extends React.PureComponent<HeaderProps, HeaderState> {
+export default class Header extends React.PureComponent<HeaderProps> {
   public handleClickAtHeader = (e) => {
     if (e.target === e.currentTarget) {
       this.props.onToggle();
     }
   }
-  public render(): JSX.Element {
-    const { className, status, title, isOpenedFeature, data } = this.props;
-    const cnHeader = cn(className, 'Box-row--gray d-flex flex-justify-between flex-items-center px-3 py-2');
+
+  public cnHeader = cn(this.props.className, 'Box-row--gray d-flex flex-justify-between flex-items-center px-3 py-2');
+
+  public render() {
+    const {
+      data,
+      title,
+      status,
+      handleDataChange,
+      pageCurrent,
+      pageCount,
+      isOpenedFeature,
+      onToggle,
+      handleViewChange,
+      viewType,
+    } = this.props;
 
     return (
-      <div
-        className={cnHeader}
-        onClick={this.handleClickAtHeader}
-      >
+      <div className={this.cnHeader} onClick={this.handleClickAtHeader}>
         <Status
           data={data}
           title={title}
           status={status}
           onClickAtTitle={this.handleClickAtHeader}
+          handleDataChange={handleDataChange}
+          pageCurrent={pageCurrent}
+          pageCount={pageCount}
         />
         <Controls
           data={data}
           isOpenedFeature={isOpenedFeature}
-          onToggle={this.props.onToggle}
+          onToggle={onToggle}
+          handleViewChange={handleViewChange}
+          viewType={viewType}
         />
       </div>
     );
   }
 }
-
-export default withPadding<HeaderProps>(Header);

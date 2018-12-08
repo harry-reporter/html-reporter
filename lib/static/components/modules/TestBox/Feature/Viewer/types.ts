@@ -1,27 +1,30 @@
-export interface IViewerProps {
+export interface ViewerProps {
   name: string;
-  result: IResultViewerProps;
-  retries: IResultViewerProps[];
+  result: ResultViewerProps;
+  retries: ResultViewerProps[];
   type: 'code' | 'tests' | 'screenshot';
   className?: string;
   measure: () => any;
 }
 
-export interface IResultViewerProps {
+export interface ResultViewerProps {
   attempt: number;
-  imagesInfo: IImagesInfo[];
-  metaInfo: IMetaInfo;
+  imagesInfo: ImagesInfo[];
+  metaInfo: MetaInfo;
   multipleTabs: boolean;
   name: string;
   screenshot: boolean;
   status: 'success' | 'fail' | 'error';
   suiteUrl: string;
-  reason?: IReasonProps;
+  reason?: ReasonProps;
+  type: 'code' | 'tests' | 'screenshot';
+  className?: string;
+  measure: () => any;
 }
 
-export interface IImagesInfo {
+export interface ImagesInfo {
   actualPath?: string;
-  reason?: IReasonProps;
+  reason?: ReasonProps;
   refImagePath: string;
   stateName: string;
   status: 'error' | 'success' | 'fail';
@@ -30,12 +33,12 @@ export interface IImagesInfo {
   onLoad?: any;
 }
 
-export interface IMetaInfo {
+export interface MetaInfo {
   url: string;
   file: string;
   sessionId: string;
 }
-export interface IReasonProps {
+export interface ReasonProps {
   message: string;
   stack: string;
 }

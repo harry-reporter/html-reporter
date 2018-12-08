@@ -3,7 +3,7 @@ import * as React from 'react';
 import './Loupe.css';
 import './types';
 
-export default class Loupe extends React.Component<ILoupeProps, {}> {
+export default class Loupe extends React.PureComponent<ILoupeProps, {}> {
   public BORDERWIDTH = 3;
   private loupeRef;
   constructor(props) {
@@ -11,21 +11,23 @@ export default class Loupe extends React.Component<ILoupeProps, {}> {
     this.loupeRef = React.createRef();
   }
   public componentDidMount() {
-    this.loupeRef.current.addEventListener('mousemove', this.props.onMove);
-    this.loupeRef.current.addEventListener('touchmove', this.props.onMove);
+    const { onMove } = this.props;
+    this.loupeRef.current.addEventListener('mousemove', onMove);
+    this.loupeRef.current.addEventListener('touchmove', onMove);
   }
   public render() {
+    const { src, width, zoom, height, left, top, x, y } = this.props;
     const w = !this.loupeRef.current ? 0 : this.loupeRef.current.offsetWidth / 2;
     const h = !this.loupeRef.current ? 0 : this.loupeRef.current.offsetHeight / 2;
 
-    const posX = this.props.x * this.props.zoom - w + this.BORDERWIDTH;
-    const posY = this.props.y * this.props.zoom - h + this.BORDERWIDTH;
+    const posX = x * zoom - w + this.BORDERWIDTH;
+    const posY = y * zoom - h + this.BORDERWIDTH;
 
     const style = {
-      backgroundImage: `url(${this.props.src})`,
-      backgroundSize: `${this.props.width * this.props.zoom}px ${this.props.height * this.props.zoom}px`,
-      left: this.props.left,
-      top: this.props.top,
+      backgroundImage: `url(${src})`,
+      backgroundSize: `${width * zoom}px ${height * zoom}px`,
+      left,
+      top,
       backgroundPosition: `-${posX}px -${posY}px`,
     };
 

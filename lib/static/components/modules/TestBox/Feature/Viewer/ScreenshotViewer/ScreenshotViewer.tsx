@@ -1,30 +1,34 @@
 import * as React from 'react';
 
-import { IViewerProps, IImagesInfo } from '../types';
+import { ImagesInfo, ResultViewerProps } from '../types';
 import SuccessBox from '../SuccessBox/SuccessBox';
 import FailBox from '../FailBox/FailBox';
 import Link from 'src/components/ui/Link/Link';
 import ErrorBox from '../ErrorBox/ErrorBox';
 import { withMeasurer } from 'src/components/modules/TestBox/withMeasurer';
 
-interface IScreenshotViewerState {
+interface ScreenshotViewerState {
   isOpen: boolean;
 }
 
-class ScreenshotViewer extends React.PureComponent<IViewerProps, IScreenshotViewerState> {
-  constructor(props: IViewerProps) {
+class ScreenshotViewer extends React.PureComponent<ResultViewerProps, ScreenshotViewerState> {
+  constructor(props: ResultViewerProps) {
     super(props);
-    this.state = { isOpen: this.props.result.status !== 'success' };
+    this.state = { isOpen: this.props.status !== 'success' };
   }
 
   public getColor() {
-    const status = this.props.result.status;
+    const status = this.props.status;
     let color = 'gray';
-    if (status === 'success') { color = 'green'; }
-    if (status === 'fail') { color = 'red'; }
+    if (status === 'success') {
+      color = 'green';
+    }
+    if (status === 'fail') {
+      color = 'red';
+    }
     return color;
   }
-  public getViewBox(item: IImagesInfo) {
+  public getViewBox(item: ImagesInfo) {
     let viewBoxWrap: any = null;
 
     switch (item.status) {
@@ -44,7 +48,7 @@ class ScreenshotViewer extends React.PureComponent<IViewerProps, IScreenshotView
     return viewBoxWrap;
   }
 
-  public getSuccessBoxTemplate(item: IImagesInfo, viewBoxWrap: JSX.Element) {
+  public getSuccessBoxTemplate(item: ImagesInfo, viewBoxWrap: JSX.Element) {
     return (
       <>
         <div className={'Box Box-row Box--condensed Box-header d-flex flex-justify-between'}>
@@ -59,7 +63,7 @@ class ScreenshotViewer extends React.PureComponent<IViewerProps, IScreenshotView
   }
 
   public renderViewBox = () => {
-    return this.props.result.imagesInfo.map((item: IImagesInfo, id: number) => {
+    return this.props.imagesInfo.map((item: ImagesInfo, id: number) => {
       return <React.Fragment key={id}>{this.getViewBox(item)}</React.Fragment>;
     });
   }
@@ -73,4 +77,4 @@ class ScreenshotViewer extends React.PureComponent<IViewerProps, IScreenshotView
   }
 }
 
-export default withMeasurer<IViewerProps>(ScreenshotViewer);
+export default withMeasurer<ResultViewerProps>(ScreenshotViewer);
