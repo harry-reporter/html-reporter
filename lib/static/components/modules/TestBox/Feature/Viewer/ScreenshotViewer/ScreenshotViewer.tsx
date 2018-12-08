@@ -5,12 +5,13 @@ import SuccessBox from '../SuccessBox/SuccessBox';
 import FailBox from '../FailBox/FailBox';
 import Link from 'src/components/ui/Link/Link';
 import ErrorBox from '../ErrorBox/ErrorBox';
+import { withMeasurer } from 'src/components/modules/TestBox/withMeasurer';
 
 interface ScreenshotViewerState {
   isOpen: boolean;
 }
 
-export default class ScreenshotViewer extends React.PureComponent<ResultViewerProps, ScreenshotViewerState> {
+class ScreenshotViewer extends React.PureComponent<ResultViewerProps, ScreenshotViewerState> {
   constructor(props: ResultViewerProps) {
     super(props);
     this.state = { isOpen: this.props.status !== 'success' };
@@ -29,18 +30,19 @@ export default class ScreenshotViewer extends React.PureComponent<ResultViewerPr
   }
   public getViewBox(item: ImagesInfo) {
     let viewBoxWrap: any = null;
+
     switch (item.status) {
       case 'success':
-        viewBoxWrap = this.getSuccessBoxTemplate(item, <SuccessBox {...item} />);
+        viewBoxWrap = this.getSuccessBoxTemplate(item, <SuccessBox onLoad={this.props.measure} {...item} />);
         break;
       case 'fail':
-        viewBoxWrap = this.getSuccessBoxTemplate(item, <FailBox {...item} />);
+        viewBoxWrap = this.getSuccessBoxTemplate(item, <FailBox onLoad={this.props.measure} {...item} />);
         break;
       case 'error':
-        viewBoxWrap = <ErrorBox {...item} />;
+        viewBoxWrap = <ErrorBox  onLoad={this.props.measure} {...item} />;
         break;
       default:
-        viewBoxWrap = this.getSuccessBoxTemplate(item, <SuccessBox {...item} />);
+        viewBoxWrap = this.getSuccessBoxTemplate(item, <SuccessBox  onLoad={this.props.measure} {...item} />);
     }
 
     return viewBoxWrap;
@@ -71,6 +73,8 @@ export default class ScreenshotViewer extends React.PureComponent<ResultViewerPr
   }
   public onLinkClick = (e) => {
     e.preventDefault();
-    this.setState(({ isOpen }) => ({ isOpen: !isOpen }));
+    this.setState(({ isOpen }) => ({ isOpen: !isOpen }), this.props.measure);
   }
 }
+
+export default withMeasurer<ResultViewerProps>(ScreenshotViewer);

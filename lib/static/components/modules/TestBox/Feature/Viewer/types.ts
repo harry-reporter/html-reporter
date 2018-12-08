@@ -4,6 +4,7 @@ export interface ViewerProps {
   retries: ResultViewerProps[];
   type: 'code' | 'tests' | 'screenshot';
   className?: string;
+  measure: () => any;
 }
 
 export interface ResultViewerProps {
@@ -18,6 +19,7 @@ export interface ResultViewerProps {
   reason?: ReasonProps;
   type: 'code' | 'tests' | 'screenshot';
   className?: string;
+  measure: () => any;
 }
 
 export interface ImagesInfo {
@@ -28,6 +30,7 @@ export interface ImagesInfo {
   status: 'error' | 'success' | 'fail';
   expectedPath?: string;
   diffPath?: string;
+  onLoad?: any;
 }
 
 export interface MetaInfo {

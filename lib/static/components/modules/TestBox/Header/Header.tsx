@@ -9,12 +9,14 @@ import { ColorType } from 'src/components/ui/types';
 
 class Header extends React.PureComponent<HeaderProps, HeaderState> {
   private getTitle = () => this.props.title;
+
   private getTextColor = (): ColorType => {
     const { status } = this.props;
 
     return status === 'fail' || status === 'error' ? 'red' : 'green';
   }
-  private getChevron = () => (this.props.isOpenedBox ? ChevronUp : ChevronDown);
+
+  private getChevron = () => this.props.isOpenedBox ? ChevronUp : ChevronDown;
 
   public render(): JSX.Element {
     const { title } = this.props;

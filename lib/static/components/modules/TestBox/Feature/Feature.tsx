@@ -4,13 +4,14 @@ import Viewer from './Viewer';
 import Header from './Header';
 
 import { FeatureProps, FeatureState } from './types';
+import { withMeasurer } from 'src/components/modules/TestBox/withMeasurer';
 
 // TODO: вынести функциионал по аккордеону в отдельную компоненту
 class Feature extends React.PureComponent<FeatureProps, FeatureState> {
   constructor(props) {
     super(props);
     this.state = {
-      isOpen: true,
+      isOpen: false,
       viewType: this.props.data.result.imagesInfo.length > 0 ? 'screenshot' : 'code',
       viewData: this.props.data.result,
       pageCount: this.props.data.result.attempt,
@@ -19,14 +20,14 @@ class Feature extends React.PureComponent<FeatureProps, FeatureState> {
   }
 
   public componentDidMount(): void {
-    const { data } = this.props;
+    const { viewData } = this.state;
     this.setState({
-      isOpen: this.state.viewData.status === 'fail',
-    });
+      isOpen: viewData.status === 'fail',
+    }, this.props.measure);
   }
 
   public toggleFeature = () => {
-    this.setState((prevState) => ({ isOpen: !prevState.isOpen }));
+    this.setState((prevState) => ({ isOpen: !prevState.isOpen }), this.props.measure);
   }
 
   public handleViewChange = (e: string) => {
@@ -66,4 +67,4 @@ class Feature extends React.PureComponent<FeatureProps, FeatureState> {
   }
 }
 
-export default Feature;
+export default withMeasurer(Feature);

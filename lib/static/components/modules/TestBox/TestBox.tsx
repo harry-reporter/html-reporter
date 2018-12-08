@@ -1,17 +1,26 @@
 import * as React from 'react';
+import cn from 'classnames';
 
 import Header from './Header';
 import Feature from './Feature';
 
-import { TestBoxProps, TestBoxState } from 'src/components/modules/TestBox/types';
+import { Measurer, TestBoxProps, TestBoxState } from 'src/components/modules/TestBox/types';
 
-class TestBox extends React.Component<TestBoxProps, TestBoxState> {
+export const MeasurerContext = React.createContext<Measurer>({});
+
+class TestBox extends React.PureComponent<TestBoxProps, TestBoxState> {
+  public measurer: Measurer;
   public state = {
     isOpen: true,
   };
 
+  constructor(props) {
+    super(props);
+    this.measurer = { measure: props.measure };
+  }
+
   public toggleBox = () => {
-    this.setState((prevState) => ({ isOpen: !prevState.isOpen }));
+    this.setState((prevState) => ({ isOpen: !prevState.isOpen }), this.props.measure);
   }
 
   public getSuite = (suitePath) => suitePath.join(' / ');
@@ -23,16 +32,26 @@ class TestBox extends React.Component<TestBoxProps, TestBoxState> {
   }
 
   public render(): JSX.Element {
-    const { data } = this.props;
+    const { data, style, className } = this.props;
     const { isOpen } = this.state;
 
     const suite = this.getSuite(data.suitePath);
+    const cnTestBox = cn('Box mb-3', className);
 
     return (
-      <div className={'Box mb-3'}>
-        <Header title={suite} status={data.status} isOpenedBox={isOpen} onToggle={this.toggleBox} />
-        {isOpen && this.renderFeatures()}
-      </div>
+      <MeasurerContext.Provider value={this.measurer}>
+        <div style={style}>
+          <div className={cnTestBox}>
+            <Header
+              title={suite}
+              status={data.status}
+              isOpenedBox={isOpen}
+              onToggle={this.toggleBox}
+            />
+            {isOpen && this.renderFeatures()}
+          </div>
+        </div>
+      </MeasurerContext.Provider>
     );
   }
 }

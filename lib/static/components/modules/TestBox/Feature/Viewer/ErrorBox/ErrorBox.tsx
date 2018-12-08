@@ -23,7 +23,12 @@ export default class ErrorBox extends React.Component<ImagesInfo> {
           </div>
         </div>
         <div className='BoxViewError-ImageBox'>
-          <img src={this.props.actualPath} alt='Error Test' className='BoxViewError-Img border border-red' />
+          <img
+            onLoad={this.props.onLoad}
+            src={this.props.actualPath}
+            alt='Error Test'
+            className='BoxViewError-Img border border-red'
+          />
         </div>
       </div>
     );
