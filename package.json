@@ -45,6 +45,7 @@
     "opener": "^1.5.1",
     "primer": "^10.10.2",
     "primer-buttons": "^2.6.2",
+    "primer-support": "^4.7.0",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-markdown": "^3.6.0",
