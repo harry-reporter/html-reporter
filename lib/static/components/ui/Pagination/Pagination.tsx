@@ -3,9 +3,9 @@ import cn from 'classnames';
 
 import { SubNavStyled, SubNavItemStyled } from './styled';
 
-import { PaginationProps, PaginationState } from './types';
+import { IPaginationProps, PaginationState } from './types';
 
-class Pagination extends React.Component<PaginationProps, PaginationState> {
+class Pagination extends React.PureComponent<IPaginationProps, PaginationState> {
   private static defaultProps = {
     hasPreventDefault: false,
     dataList: [],
@@ -16,8 +16,7 @@ class Pagination extends React.Component<PaginationProps, PaginationState> {
   };
 
   public componentDidMount(): void {
-    const { defaultCurrentPage } = this.props;
-    this.setState({ currentPage: defaultCurrentPage });
+    this.setState({ currentPage: this.props.pageCount });
   }
 
   public handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -29,6 +28,7 @@ class Pagination extends React.Component<PaginationProps, PaginationState> {
 
     // TODO: убрать any
     const { dataset } = e.target as any;
+    this.props.handleDataChange(Number(dataset.page));
     this.setState({ currentPage: Number(dataset.page) });
   }
 
@@ -57,40 +57,31 @@ class Pagination extends React.Component<PaginationProps, PaginationState> {
    *
    */
   public renderSubNavByMaxPage = (): React.ReactNode => {
-    const { maxPage } = this.props;
     const { currentPage } = this.state;
 
     const subNavList: React.ReactNode[] = [];
 
-    for (let i = 1; i < maxPage + 1; i++) {
+    for (let i = 0; i < this.props.pageCount + 1; i++) {
       const cnSubNav = cn('subnav-item', { selected: currentPage === i });
 
-      subNavList.push((
-        <SubNavItemStyled
-          key={i}
-          className={cnSubNav}
-          data-page={i}
-          href={'#'}
-          onClick={this.handleClick}
-        >
-          {i}
-        </SubNavItemStyled>
-      ));
+      subNavList.push(
+        <SubNavItemStyled key={i} className={cnSubNav} data-page={i} href={'#'} onClick={this.handleClick}>
+          {i + 1}
+        </SubNavItemStyled>,
+      );
     }
 
     return subNavList;
   }
 
   public render(): JSX.Element {
-    const { dataList, maxPage } = this.props;
+    const { dataList } = this.props;
 
-    if (!maxPage && (dataList.length === 0)) {
+    if (!this.props.pageCount && dataList.length === 0) {
       return null;
     }
 
-    const subNav: React.ReactNode = maxPage
-      ? this.renderSubNavByMaxPage()
-      : this.renderSubNavByDataList();
+    const subNav: React.ReactNode = this.props.pageCount ? this.renderSubNavByMaxPage() : this.renderSubNavByDataList();
 
     return <SubNavStyled className={'subnav f6'}>{subNav}</SubNavStyled>;
   }

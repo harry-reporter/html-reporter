@@ -12,9 +12,7 @@ class Header extends React.PureComponent<HeaderProps, HeaderState> {
   private getTextColor = (): ColorType => {
     const { status } = this.props;
 
-    return (status === 'fail') || (status === 'error')
-      ? 'red'
-      : 'green';
+    return status === 'fail' || status === 'error' ? 'red' : 'green';
   }
   private getChevron = () => (this.props.isOpenedBox ? ChevronUp : ChevronDown);
 
@@ -25,14 +23,8 @@ class Header extends React.PureComponent<HeaderProps, HeaderState> {
     const Chevron = this.getChevron();
 
     return (
-      <HeaderContainerStyled
-        className={'Box-header d-flex flex-justify-between flex-items-center p-3'}
-      >
-        <Text
-          as={'span'}
-          textColor={textColor}
-          textType={'bold'}
-        >
+      <HeaderContainerStyled className={'Box-header d-flex flex-justify-between flex-items-center p-3'}>
+        <Text as={'span'} textColor={textColor} textType={'bold'}>
           {title}
         </Text>
         <ControlsStyled>

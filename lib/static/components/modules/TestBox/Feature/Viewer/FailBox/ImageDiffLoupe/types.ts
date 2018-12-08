@@ -1,10 +1,10 @@
-interface IImageDiffProps {
+interface ImageDiffProps {
   after: string;
   before: string;
   zoom: number;
   className?: string;
 }
-interface IImageDiffState {
+interface ImageDiffState {
   top: string;
   left: string;
   x: number;

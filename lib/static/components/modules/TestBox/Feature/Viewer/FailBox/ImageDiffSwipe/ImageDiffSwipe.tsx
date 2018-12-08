@@ -28,30 +28,30 @@ export default class ImageDiffSwipe extends React.Component<IImageDiffSwipeProps
   }
 
   public render() {
-    const cn = this.props.className;
+    const { className, value, before, after } = this.props;
+    const { maxHeight, containerWidth } = this.state;
     const ContainerStyle = {
-      height: `${this.state.maxHeight}px`,
+      height: `${maxHeight}px`,
     };
     const beforeStyle = {
-      width: `${this.props.value * this.state.containerWidth}px`,
+      width: `${value * containerWidth}px`,
     };
-
     const afterStyle = {
-      width: `${this.state.containerWidth - this.props.value * this.state.containerWidth}px`,
+      width: `${containerWidth - value * containerWidth}px`,
     };
     const imgAfterStyle = {
-      marginLeft: `-${this.props.value * this.state.containerWidth}px`,
+      marginLeft: `-${value * containerWidth}px`,
     };
 
     return (
-      <div className={cn}>
-        <div className={`${cn}-ImageSwipe`}>
+      <div className={className}>
+        <div className={`${className}-ImageSwipe`}>
           <div className='SwipeContainer' style={ContainerStyle} ref={this.containerRef}>
             <div className='ImageContainer__before  border border-green' style={beforeStyle}>
-              <img src={this.props.before} className='Image__before' onLoad={this.imgLoadHandler} />
+              <img src={before} className='Image__before' onLoad={this.imgLoadHandler} />
             </div>
             <div className='ImageContainer__after  border border-red' style={afterStyle}>
-              <img src={this.props.after} className='Image__after' onLoad={this.imgLoadHandler} style={imgAfterStyle} />
+              <img src={after} className='Image__after' onLoad={this.imgLoadHandler} style={imgAfterStyle} />
             </div>
           </div>
         </div>

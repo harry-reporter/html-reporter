@@ -6,50 +6,52 @@ import ImageDiffOnionSkin from './ImageDiffOnionSkin/ImageDiffOnionSkin';
 
 import './types';
 import './FailBox.css';
-import { IImagesInfo } from '../types';
+import { ImagesInfo } from '../types';
 
-export default class FailBox extends React.Component<IImagesInfo, IFailBoxState> {
+export default class FailBox extends React.PureComponent<ImagesInfo, IFailBoxState> {
   public state = {
     tabId: 0,
     valueSwipe: 0.5,
     valueOnionSkin: 0.5,
     valueLoupe: 2,
   };
-  public textModItem = ['2-up', 'Only Diff', 'Loupe', 'Swipe', 'Onion Skin'];
+  public textModItem = ['3-up', 'Only Diff', 'Loupe', 'Swipe', 'Onion Skin'];
   public getBoxContent(): JSX.Element {
+    const { expectedPath, actualPath, diffPath } = this.props;
     return (
       <>
-        {this.getBoxItem('Expected', 'green', this.props.expectedPath)}
-        {this.getBoxItem('Actual', 'red', this.props.actualPath)}
-        {this.getBoxItem('Diff', 'gray', this.props.diffPath)}
+        {this.getBoxItem('Expected', 'green', expectedPath)}
+        {this.getBoxItem('Actual', 'red', actualPath)}
+        {this.getBoxItem('Diff', 'gray', diffPath)}
       </>
     );
   }
 
   public getBoxContentDiff(): JSX.Element {
-    return <>{this.getBoxItem('Diff', 'gray', this.props.diffPath)}</>;
+    const { diffPath } = this.props;
+    return <>{this.getBoxItem('Diff', 'gray', diffPath)}</>;
   }
 
   public getBoxContentSwipe(): JSX.Element {
-    const imageProps = {
-      before: this.props.expectedPath,
-      after: this.props.actualPath,
-      value: this.state.valueSwipe,
-      className: 'BoxContentSwipe-ImageDiff',
-    };
-    const rangeProps = {
-      type: 'range',
-      min: 0,
-      max: 1,
-      step: 0.01,
-      defaultValue: `${this.state.valueSwipe}`,
-      onChange: this.handleInputChange,
-      className: 'BoxContentSwipe-Range mt-2',
-    };
+    const { valueSwipe } = this.state;
+    const { expectedPath, actualPath } = this.props;
     return (
       <div className='BoxContentSwipe d-flex flex-column'>
-        <ImageDiffSwipe {...imageProps} />
-        <input {...rangeProps} />
+        <ImageDiffSwipe
+          before={expectedPath}
+          after={actualPath}
+          value={valueSwipe}
+          className='BoxContentSwipe-ImageDiff'
+        />
+        <input
+          type='range'
+          min={0}
+          max={1}
+          step={0.01}
+          defaultValue={`${this.state.valueSwipe}`}
+          onChange={this.handleInputChange}
+          className='BoxContentSwipe-Range mt-2'
+        />
       </div>
     );
   }
@@ -62,32 +64,22 @@ export default class FailBox extends React.Component<IImagesInfo, IFailBoxState>
   }
 
   public getBoxItem(cn: string, color: string, imgPath: string): JSX.Element {
-    const imgProps = {
-      src: imgPath,
-      alt: `${cn}-Img`,
-      className: `FailBox-Img border border-${color}`,
-    };
     return (
       <div className={cn}>
         <p className={`Title text-${color} text-bold`}>{cn}</p>
-        <img {...imgProps} />
+        <img src={imgPath} alt={`${cn}-Img`} className={`FailBox-Img border border-${color}`} />
       </div>
     );
   }
 
   public getItem(item: string, key: number): JSX.Element {
-    const liProps = {
-      key,
-      className: 'modNav-item',
-    };
-    const linkProps = {
-      href: '#url',
-      className: `modNav-item-link ${this.state.tabId === key ? 'selected' : ''}`,
-      onClick: this.handleClickAtTab(key),
-    };
+    const { tabId } = this.state;
+    const isSelected = tabId === key ? 'selected' : '';
     return (
-      <li {...liProps}>
-        <a {...linkProps}>{item}</a>
+      <li key={key} className='modNav-item'>
+        <a href='#url' className={`modNav-item-link ${isSelected}`} onClick={this.handleClickAtTab(key)}>
+          {item}
+        </a>
       </li>
     );
   }
@@ -111,25 +103,25 @@ export default class FailBox extends React.Component<IImagesInfo, IFailBoxState>
   }
 
   public getBoxContentLoupe() {
-    const imageDiffLoupeProps = {
-      before: this.props.expectedPath,
-      after: this.props.actualPath,
-      zoom: this.state.valueLoupe,
-      className: 'BoxContentLoupe-ImageDiff',
-    };
-    const rangeDiffLoupeProps = {
-      type: 'range',
-      min: 1,
-      max: 3,
-      step: 0.01,
-      defaultValue: `${this.state.valueLoupe}`,
-      onChange: this.handleInputChangeLoupe,
-      className: 'BoxContentLoupe-range mt-2',
-    };
+    const { expectedPath, actualPath } = this.props;
+    const { valueLoupe } = this.state;
     return (
       <div className='BoxContentLoupe d-flex flex-column'>
-        <ImageDiffLoupe {...imageDiffLoupeProps} />
-        <input {...rangeDiffLoupeProps} />
+        <ImageDiffLoupe
+          before={expectedPath}
+          after={actualPath}
+          zoom={valueLoupe}
+          className='BoxContentLoupe-ImageDiff'
+        />
+        <input
+          type='range'
+          min={1}
+          max={3}
+          step={0.01}
+          defaultValue={`${valueLoupe}`}
+          onChange={this.handleInputChangeLoupe}
+          className='BoxContentLoupe-range mt-2'
+        />
       </div>
     );
   }
@@ -139,25 +131,26 @@ export default class FailBox extends React.Component<IImagesInfo, IFailBoxState>
   }
 
   public getBoxContentOnionSkin() {
-    const imageDiffOnionSkinProps = {
-      before: this.props.expectedPath,
-      after: this.props.actualPath,
-      value: this.state.valueOnionSkin,
-      className: 'BoxContentOnionSkin-ImageDiff',
-    };
-    const rangeImageDiffOnionSkinProps = {
-      type: 'range',
-      min: 0,
-      max: 1,
-      step: 0.01,
-      defaultValue: `${this.state.valueOnionSkin}`,
-      onChange: this.handleInputChangeOnion,
-      className: 'BoxContentOnionSkin-range mt-2',
-    };
+    const { expectedPath, actualPath } = this.props;
+    const { valueOnionSkin } = this.state;
+
     return (
       <div className='BoxContentOnionSkin d-flex flex-column'>
-        <ImageDiffOnionSkin {...imageDiffOnionSkinProps} />
-        <input {...rangeImageDiffOnionSkinProps} />
+        <ImageDiffOnionSkin
+          before={expectedPath}
+          after={actualPath}
+          value={valueOnionSkin}
+          className='BoxContentOnionSkin-ImageDiff'
+        />
+        <input
+          type='range'
+          min={0}
+          max={1}
+          step={0.01}
+          defaultValue={`${valueOnionSkin}`}
+          onChange={this.handleInputChangeOnion}
+          className='BoxContentOnionSkin-range mt-2'
+        />
       </div>
     );
   }
