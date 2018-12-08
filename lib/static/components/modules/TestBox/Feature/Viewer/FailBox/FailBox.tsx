@@ -8,7 +8,7 @@ import './types';
 import './FailBox.css';
 import { ImagesInfo } from '../types';
 
-export default class FailBox extends React.PureComponent<ImagesInfo, IFailBoxState> {
+class FailBox extends React.PureComponent<ImagesInfo, FailBoxState> {
   public state = {
     tabId: 0,
     valueSwipe: 0.5,
@@ -48,7 +48,7 @@ export default class FailBox extends React.PureComponent<ImagesInfo, IFailBoxSta
           min={0}
           max={1}
           step={0.01}
-          defaultValue={`${this.state.valueSwipe}`}
+          value={valueSwipe}
           onChange={this.handleInputChange}
           className='BoxContentSwipe-Range mt-2'
         />
@@ -118,7 +118,7 @@ export default class FailBox extends React.PureComponent<ImagesInfo, IFailBoxSta
           min={1}
           max={3}
           step={0.01}
-          defaultValue={`${valueLoupe}`}
+          value={valueLoupe}
           onChange={this.handleInputChangeLoupe}
           className='BoxContentLoupe-range mt-2'
         />
@@ -147,7 +147,7 @@ export default class FailBox extends React.PureComponent<ImagesInfo, IFailBoxSta
           min={0}
           max={1}
           step={0.01}
-          defaultValue={`${valueOnionSkin}`}
+          value={valueOnionSkin}
           onChange={this.handleInputChangeOnion}
           className='BoxContentOnionSkin-range mt-2'
         />
@@ -189,3 +189,4 @@ export default class FailBox extends React.PureComponent<ImagesInfo, IFailBoxSta
     );
   }
 }
+export default FailBox;

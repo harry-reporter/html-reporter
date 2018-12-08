@@ -3,7 +3,7 @@ import * as React from 'react';
 import './types';
 import './ImageDiffSwipe.css';
 
-export default class ImageDiffSwipe extends React.Component<IImageDiffSwipeProps, IImageDiffSwipeState> {
+class ImageDiffSwipe extends React.PureComponent<IImageDiffSwipeProps, IImageDiffSwipeState> {
   public containerRef;
   constructor(props) {
     super(props);
@@ -59,3 +59,5 @@ export default class ImageDiffSwipe extends React.Component<IImageDiffSwipeProps
     );
   }
 }
+
+export default ImageDiffSwipe;
