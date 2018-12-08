@@ -60,4 +60,5 @@ export const acceptAll = (fails) => {
 };
 
 export const setUrl = (value) => ({ type: actionNames.UPDATE_URL, payload: value });
-export const setViewMode = (value) => ({ type: actionNames.SET_VIEW_MODE, payload: value });
+export const setScreenViewMode = (value) => ({ type: actionNames.SET_SCREEN_VIEW_MODE, payload: value });
+export const setTestsViewMode = (value) => ({ type: actionNames.SET_TESTS_VIEW_MODE, payload: value });

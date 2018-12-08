@@ -12,10 +12,8 @@ import ControlPanelStyled from './styled';
 import { ControlPanelProps } from './types';
 import { RootStore } from 'src/store/types/store';
 
-import 'src/styles.css';
-
 const ControlPanel: React.SFC<ControlPanelProps> = (props) => {
-  const { setUrl, runAllTests, runFailedTests, acceptAll, setViewMode } = props;
+  const { setUrl, runAllTests, runFailedTests, acceptAll, setTestsViewMode, setScreenViewMode } = props;
 
   const handleInputUrl = (ev) => setUrl(ev.target.value);
   const handleRunFail = () => {
@@ -27,29 +25,30 @@ const ControlPanel: React.SFC<ControlPanelProps> = (props) => {
     acceptAll();
   };
 
-  const handleSetViewMode = (value: string) => () => setViewMode(value);
+  const handleScreenViewMode = (value: string) => () => setTestsViewMode(value);
+  const handleTestsViewMode = (value: string) => () => setScreenViewMode(value);
 
   return (
     <ControlPanelStyled>
-      <TextInput placeholred={'Url input'} className={'mr-2 one-fourth'} onChange={handleInputUrl} />
+      <TextInput placeholder={'Url input'} className={'mr-2 one-fourth'} onChange={handleInputUrl} />
       <Dropdown className={'mr-2'} title={'Run tests'}>
         <DropdownItem title={'Run all tests'} onClick={runAllTests} />
         <DropdownItem title={'Restart failed tests'} onClick={handleRunFail} />
       </Dropdown>
 
       <Dropdown className={'mr-2'} title={'Show/hide'}>
-        <DropdownItem title={'Collapse all'} />
-        <DropdownItem title={'Expand all'} />
-        <DropdownItem title={'Expand errors'} />
-        <DropdownItem title={'Expand retries'} />
+        <DropdownItem title={'Collapse all'} onClick={handleTestsViewMode('collapseAll')} />
+        <DropdownItem title={'Expand all'} onClick={handleTestsViewMode('expandAll')} />
+        <DropdownItem title={'Expand errors'} onClick={handleTestsViewMode('expandErrors')} />
+        <DropdownItem title={'Expand retries'} onClick={handleTestsViewMode('expandRetries')} />
       </Dropdown>
 
       <Dropdown className={'mr-2'} title={'View mode'}>
-        <DropdownItem title={'3-up'} onClick={handleSetViewMode('3-up')} />
-        <DropdownItem title={'Only Diff'} onClick={handleSetViewMode('onlyDiff')} />
-        <DropdownItem title={'Loupe'} onClick={handleSetViewMode('loupe')} />
-        <DropdownItem title={'Swipe'} onClick={handleSetViewMode('swipe')} />
-        <DropdownItem title={'Onion Skin'} onClick={handleSetViewMode('onionSkin')} />
+        <DropdownItem title={'3-up'} onClick={handleScreenViewMode('3-up')} />
+        <DropdownItem title={'Only Diff'} onClick={handleScreenViewMode('onlyDiff')} />
+        <DropdownItem title={'Loupe'} onClick={handleScreenViewMode('loupe')} />
+        <DropdownItem title={'Swipe'} onClick={handleScreenViewMode('swipe')} />
+        <DropdownItem title={'Onion Skin'} onClick={handleScreenViewMode('onionSkin')} />
       </Dropdown>
 
       <Button title={'Accept all'} className={'mr-2'} onClick={handleAcceptAll} />

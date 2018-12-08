@@ -1,11 +1,15 @@
 import * as React from 'react';
+import cn from 'classnames';
 import { DropdownProps } from './types';
 
+import './styles.css';
+
 const Dropdown: React.SFC<DropdownProps> = (props) => {
-  const { children = null, className, title, isOpened, ...restProps } = props;
+  const { children = null, className, title, isOpened } = props;
+  const cnDropdownItem = cn('dropdown details-reset details-overlay d-inline-block', className);
 
   return (
-    <details className={`${className} dropdown details-reset details-overlay d-inline-block`}>
+    <details className={cnDropdownItem}>
       <summary className='btn' aria-haspopup='true'>
         {title}
         <div className='dropdown-caret' />

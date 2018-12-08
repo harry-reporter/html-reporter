@@ -4,7 +4,8 @@ import * as actionNames from './constants';
 const defaultState: AppStore = {
   selectedTestsType: TestsTypeKey.total,
   url: '',
-  viewMode: '3-up',
+  screenViewMode: '3-up',
+  testsViewMode: 'expandErrors',
 };
 
 export const reducer = (state: AppStore = defaultState, action): AppStore => {
@@ -17,8 +18,11 @@ export const reducer = (state: AppStore = defaultState, action): AppStore => {
     case actionNames.UPDATE_URL:
       return { ...state, url: payload };
 
-    case actionNames.SET_VIEW_MODE:
-      return { ...state, viewMode: payload };
+    case actionNames.SET_SCREEN_VIEW_MODE:
+      return { ...state, screenViewMode: payload };
+
+    case actionNames.SET_TESTS_VIEW_MODE:
+      return { ...state, testsViewMode: payload };
 
     default: return state;
   }

@@ -1,14 +1,16 @@
 import * as React from 'react';
+import cn from 'classnames';
 import { TextInputProps } from './types';
 
 const TextInput: React.SFC<TextInputProps> = (props) => {
-  const { className, placeholred, onChange, ...restProps } = props;
+  const { className, placeholder, onChange } = props;
+  const cnInput = cn('form-control', className);
 
   return (
     <input
-      className={`${className} form-control`}
+      className={cnInput}
       type='text'
-      placeholder={placeholred}
+      placeholder={placeholder}
       onChange={onChange}
     />
   );
