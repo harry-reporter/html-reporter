@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { IViewerProps, IImagesInfo } from '../types';
+import { IViewerProps, ImagesInfo } from '../types';
 import SuccessBox from '../SuccessBox/SuccessBox';
 import FailBox from '../FailBox/FailBox';
 import Link from 'src/components/ui/Link/Link';
@@ -20,11 +20,15 @@ class ScreenshotViewer extends React.PureComponent<IViewerProps, IScreenshotView
   public getColor() {
     const status = this.props.result.status;
     let color = 'gray';
-    if (status === 'success') { color = 'green'; }
-    if (status === 'fail') { color = 'red'; }
+    if (status === 'success') {
+      color = 'green';
+    }
+    if (status === 'fail') {
+      color = 'red';
+    }
     return color;
   }
-  public getViewBox(item: IImagesInfo) {
+  public getViewBox(item: ImagesInfo) {
     let viewBoxWrap: any = null;
 
     switch (item.status) {
@@ -35,16 +39,16 @@ class ScreenshotViewer extends React.PureComponent<IViewerProps, IScreenshotView
         viewBoxWrap = this.getSuccessBoxTemplate(item, <FailBox onLoad={this.props.measure} {...item} />);
         break;
       case 'error':
-        viewBoxWrap = <ErrorBox  onLoad={this.props.measure} {...item} />;
+        viewBoxWrap = <ErrorBox onLoad={this.props.measure} {...item} />;
         break;
       default:
-        viewBoxWrap = this.getSuccessBoxTemplate(item, <SuccessBox  onLoad={this.props.measure} {...item} />);
+        viewBoxWrap = this.getSuccessBoxTemplate(item, <SuccessBox onLoad={this.props.measure} {...item} />);
     }
 
     return viewBoxWrap;
   }
 
-  public getSuccessBoxTemplate(item: IImagesInfo, viewBoxWrap: JSX.Element) {
+  public getSuccessBoxTemplate(item: ImagesInfo, viewBoxWrap: JSX.Element) {
     return (
       <>
         <div className={'Box Box-row Box--condensed Box-header d-flex flex-justify-between'}>
@@ -59,7 +63,7 @@ class ScreenshotViewer extends React.PureComponent<IViewerProps, IScreenshotView
   }
 
   public renderViewBox = () => {
-    return this.props.result.imagesInfo.map((item: IImagesInfo, id: number) => {
+    return this.props.result.imagesInfo.map((item: ImagesInfo, id: number) => {
       return <React.Fragment key={id}>{this.getViewBox(item)}</React.Fragment>;
     });
   }

@@ -9,7 +9,7 @@ export interface IViewerProps {
 
 export interface IResultViewerProps {
   attempt: number;
-  imagesInfo: IImagesInfo[];
+  imagesInfo: ImagesInfo[];
   metaInfo: IMetaInfo;
   multipleTabs: boolean;
   name: string;
@@ -19,7 +19,7 @@ export interface IResultViewerProps {
   reason?: IReasonProps;
 }
 
-export interface IImagesInfo {
+export interface ImagesInfo {
   actualPath?: string;
   reason?: IReasonProps;
   refImagePath: string;

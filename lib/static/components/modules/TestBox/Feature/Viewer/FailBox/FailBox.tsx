@@ -6,9 +6,9 @@ import ImageDiffOnionSkin from './ImageDiffOnionSkin/ImageDiffOnionSkin';
 
 import './types';
 import './FailBox.css';
-import { IImagesInfo } from '../types';
+import { ImagesInfo } from '../types';
 
-export default class FailBox extends React.Component<IImagesInfo, IFailBoxState> {
+export default class FailBox extends React.Component<ImagesInfo, IFailBoxState> {
   public state = {
     tabId: 0,
     valueSwipe: 0.5,

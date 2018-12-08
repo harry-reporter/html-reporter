@@ -1,9 +1,9 @@
 import * as React from 'react';
 
-import { IImagesInfo } from '../types';
+import { ImagesInfo } from '../types';
 import './ErrorBox.css';
 
-export default class ErrorBox extends React.Component<IImagesInfo> {
+export default class ErrorBox extends React.Component<ImagesInfo> {
   public render(): JSX.Element {
     return (
       <div className='Box flash flash-full flash-error d-flex flex-justify-between'>
