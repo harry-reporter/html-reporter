@@ -15,7 +15,7 @@ export default class FailBox extends React.PureComponent<ImagesInfo, IFailBoxSta
     valueOnionSkin: 0.5,
     valueLoupe: 2,
   };
-  public textModItem = ['2-up', 'Only Diff', 'Loupe', 'Swipe', 'Onion Skin'];
+  public textModItem = ['3-up', 'Only Diff', 'Loupe', 'Swipe', 'Onion Skin'];
   public getBoxContent(): JSX.Element {
     const { expectedPath, actualPath, diffPath } = this.props;
     return (

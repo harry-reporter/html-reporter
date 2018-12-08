@@ -6,7 +6,7 @@ import Header from './Header';
 import { FeatureProps, FeatureState } from './types';
 
 // TODO: вынести функциионал по аккордеону в отдельную компоненту
-class Feature extends React.Component<FeatureProps, FeatureState> {
+class Feature extends React.PureComponent<FeatureProps, FeatureState> {
   constructor(props) {
     super(props);
     this.state = {
