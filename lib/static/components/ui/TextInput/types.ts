@@ -2,5 +2,5 @@ export interface TextInputProps {
   placeholred?: string;
   className?: string;
 
-  onChange?: (e: React.MouseEvent<HTMLButtonElement>) => any;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }

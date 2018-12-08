@@ -8,4 +8,6 @@ export enum TestsTypeKey {
 
 export interface AppStore {
   selectedTestsType: TestsTypeKey;
+  url: string;
+  viewMode: string;
 }

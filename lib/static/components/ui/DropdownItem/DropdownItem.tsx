@@ -6,10 +6,10 @@ import { DropdownItemProps } from './types';
 // import 'primer-support';
 
 const DropdownItem: React.SFC<DropdownItemProps> = (props) => {
-  const { className, title, url, ...restProps } = props;
+  const { className, title, url, onClick, ...restProps } = props;
 
   return (
-    <li><a className='dropdown-item' href={url}>{title}</a></li>
+    <li><a className='dropdown-item' href={url} onClick={onClick}>{title}</a></li>
   );
 };
 
